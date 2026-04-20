@@ -131,6 +131,62 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;hei
 .stable tr:last-child td{border-bottom:none;font-weight:700;color:var(--accent)}
 .stable .n{text-align:right}
 
+/* 决策面板 4 档色卡 */
+.decision-board{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.db-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.db-col{padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border)}
+.db-col.recommend{background:rgba(5,150,105,.06);border-color:rgba(5,150,105,.25)}
+.db-col.strategic{background:rgba(59,130,246,.06);border-color:rgba(59,130,246,.25)}
+.db-col.leverage{background:rgba(217,119,6,.06);border-color:rgba(217,119,6,.25)}
+.db-col.skip{background:rgba(220,38,38,.04);border-color:rgba(220,38,38,.2)}
+.db-head{font-weight:700;font-size:.82rem;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.db-desc{font-size:.7rem;color:var(--text3);margin-bottom:8px}
+.db-item{display:flex;justify-content:space-between;font-size:.78rem;padding:3px 0;border-bottom:1px dashed var(--border)}
+.db-item:last-child{border-bottom:none}
+.db-score{font-variant-numeric:tabular-nums;color:var(--text3)}
+
+/* 战略推荐卡片 */
+.advisor-medal{display:flex;align-items:flex-start;gap:12px;padding:14px;border-radius:var(--radius-sm);margin-bottom:10px;background:var(--bg3);border-left:4px solid var(--accent)}
+.advisor-medal.gold{border-left-color:#fbbf24}
+.advisor-medal.silver{border-left-color:#94a3b8}
+.advisor-medal.bronze{border-left-color:#d97706}
+.advisor-rank{font-size:1.4rem;flex-shrink:0}
+.advisor-body{flex:1;min-width:0;font-size:.82rem}
+.advisor-name{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.advisor-scores{font-size:.72rem;color:var(--text3);margin-bottom:6px;font-variant-numeric:tabular-nums}
+.advisor-play{color:var(--accent);font-weight:600;margin-bottom:4px}
+.advisor-tip{color:var(--text2);padding:2px 0}
+.advisor-risk{color:var(--rose);font-size:.72rem;margin-top:4px}
+.advisor-block{padding:12px 14px;border-radius:var(--radius-sm);margin:10px 0;font-size:.82rem}
+.advisor-block.strategic-hold{background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2)}
+.advisor-block.leverage-hold{background:rgba(217,119,6,.04);border:1px solid rgba(217,119,6,.15)}
+.advisor-block.skip-hold{background:rgba(220,38,38,.03);border:1px solid rgba(220,38,38,.12)}
+.advisor-block-title{font-weight:700;margin-bottom:6px}
+.advisor-budget{padding:12px 14px;background:rgba(99,102,241,.04);border:1px dashed rgba(99,102,241,.2);border-radius:var(--radius-sm);margin-top:10px;font-size:.78rem}
+.advisor-budget-title{font-weight:700;color:var(--accent);margin-bottom:6px}
+.advisor-budget-item{padding:2px 0;color:var(--text2)}
+.eu-warn{color:#ea580c;font-weight:600}
+
+/* 策略矩阵 */
+.matrix-table{width:100%;border-collapse:separate;border-spacing:0;font-size:.78rem}
+.matrix-table th{color:var(--text3);font-weight:500;text-align:center;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--bg3)}
+.matrix-table th:first-child{text-align:left}
+.matrix-table td{padding:8px 10px;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums;text-align:center}
+.matrix-table td:first-child{text-align:left;font-weight:500}
+.matrix-table td.three-all{font-weight:700}
+.matrix-cell-green{background:rgba(5,150,105,.1);color:var(--green)}
+.matrix-cell-amber{background:rgba(217,119,6,.1);color:var(--amber)}
+.matrix-cell-red{background:rgba(220,38,38,.08);color:var(--rose)}
+
+/* 移动端响应 */
+@media(max-width:640px){
+  .db-grid{grid-template-columns:1fr}
+  .advisor-medal{flex-direction:column}
+  .matrix-table{min-width:520px}
+  .stable,.matrix-table{font-size:.72rem}
+  .card:has(.matrix-table){overflow-x:auto}
+}
+
 .sources{margin-top:20px;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:.72rem;color:var(--text3);box-shadow:var(--shadow)}
 .sources h3{font-size:.78rem;color:var(--text2);margin-bottom:6px;font-weight:600}
 .sources ul{list-style:none;padding:0}
@@ -211,7 +267,15 @@ function defaultChina() {
       {id:'v19',name:'价格敏感度',trend:'down',detail:'年轻群体价格敏感，需低价起步'},
       {id:'v20',name:'竞品免费替代',trend:'down',detail:'微信基础功能免费，需差异化价值'},
       {id:'v21',name:'节日/纪念日高峰',trend:'up',detail:'情人节、纪念日等付费意愿激增'}
-    ]
+    ],
+    feasibility:{
+      compliance:5,localization:1,competition:5,channel:4,operation:4,
+      risks:['ICP 备案硬门槛','网安法+数据安全法','微信生态封禁风险','4 大应用商店碎片化']
+    },
+    strategicValue:{
+      score:5,mode:'retain',
+      reasons:['营销声量','KOL 生态','反哺海外版产品迭代','国民情侣叙事']
+    }
   };
 }
 
@@ -256,7 +320,15 @@ const PRESETS=[
       {id:gid(),name:'微交易模式',trend:'up',detail:'小额高频付费（₹10-50），适合低ARPU市场'},
       {id:gid(),name:'广告收入潜力',trend:'up',detail:'印度数字广告市场年增20%+'},
       {id:gid(),name:'婚恋礼物文化',trend:'up',detail:'节日+婚季高峰期付费意愿激增'}
-    ]
+    ],
+    feasibility:{
+      compliance:3,localization:5,competition:3,channel:2,operation:3,
+      risks:['22 种官方语言本地化 ROI 低','低 ARPU 支撑不住 CPI','DPDP Act 演进中']
+    },
+    strategicValue:{
+      score:2,mode:'skip',
+      reasons:['人口红利但 ARR 小','品牌声量弱']
+    }
   })},
   {key:'sea',label:'🇮🇩 东南亚',gen:()=>({
     id:gid(),name:'东南亚',
@@ -291,7 +363,15 @@ const PRESETS=[
       {id:gid(),name:'支付基础设施',trend:'up',detail:'GoPay/OVO/GCash等电子钱包普及，降低付费门槛'},
       {id:gid(),name:'虚拟礼物文化',trend:'up',detail:'直播打赏习惯已培养，转化门槛低'},
       {id:gid(),name:'季节性消费',trend:'up',detail:'情人节/圣诞/本地节日消费高峰'}
-    ]
+    ],
+    feasibility:{
+      compliance:2,localization:4,competition:3,channel:2,operation:3,
+      risks:['多语言宗教碎片（穆斯林/佛教/天主教）','Line/Grab/GoPay 生态','支付基础设施分化']
+    },
+    strategicValue:{
+      score:2,mode:'skip',
+      reasons:['ARR 绝对值小','品牌声量低']
+    }
   })},
   {key:'na',label:'🇺🇸 北美',gen:()=>({
     id:gid(),name:'北美',
@@ -328,7 +408,15 @@ const PRESETS=[
       {id:gid(),name:'付费习惯',trend:'up',detail:'Netflix/Spotify培养的订阅付费习惯'},
       {id:gid(),name:'高ARPU潜力',trend:'up',detail:'约会App ARPU $15-30/月，天花板高'},
       {id:gid(),name:'订阅制模型',trend:'up',detail:'Freemium+订阅是主流变现模式'}
-    ]
+    ],
+    feasibility:{
+      compliance:3,localization:1,competition:5,channel:2,operation:2,
+      risks:['Tinder/Bumble/Hinge 竞品战壕深','CPI 飙高（$3-8）','订阅疲劳','窗口期 <12 月']
+    },
+    strategicValue:{
+      score:5,mode:'grow',
+      reasons:['全球定价标杆','投资人背书','PR 天然入口']
+    }
   })},
   {key:'eu',label:'🇪🇺 欧洲',gen:()=>({
     id:gid(),name:'欧洲',
@@ -362,7 +450,15 @@ const PRESETS=[
     revVars:[
       {id:gid(),name:'中等ARPU',trend:'up',detail:'欧洲约会市场ARPU €8-15/月'},
       {id:gid(),name:'本地支付偏好',trend:'neutral',detail:'iDEAL/Bancontact等本地支付需适配'}
-    ]
+    ],
+    feasibility:{
+      compliance:5,localization:5,competition:4,channel:2,operation:4,
+      risks:['⚠️ GDPR 合规 $50k+ 起步 + $10k/年维护','DSA 新规要求算法透明','24 语言 ASO','多时区客服']
+    },
+    strategicValue:{
+      score:3,mode:'defer',
+      reasons:['品牌背书中等','建议 Year 2 进入']
+    }
   })},
   {key:'jpkr',label:'🇯🇵 日韩',gen:()=>({
     id:gid(),name:'日韩',
@@ -396,7 +492,15 @@ const PRESETS=[
       {id:gid(),name:'付费文化',trend:'up',detail:'日韩用户App内付费习惯全球最强'},
       {id:gid(),name:'高付费意愿',trend:'up',detail:'日韩移动App ARPU全球前三'},
       {id:gid(),name:'限定/季节商品',trend:'up',detail:'限定版虚拟商品、季节限定功能驱动消费'}
-    ]
+    ],
+    feasibility:{
+      compliance:2,localization:4,competition:4,channel:3,operation:3,
+      risks:['LINE/KakaoTalk 生态壁垒','Pairs/Between 本土竞品成熟','需深度日韩文本地化']
+    },
+    strategicValue:{
+      score:4,mode:'grow',
+      reasons:['东亚付费文化标杆','全球 ARPPU 天花板','PR 价值']
+    }
   })},
   {key:'latam',label:'🇧🇷 拉丁美洲',gen:()=>({
     id:gid(),name:'拉丁美洲',
@@ -430,7 +534,15 @@ const PRESETS=[
     revVars:[
       {id:gid(),name:'中等付费能力',trend:'neutral',detail:'ARPU受汇率影响波动大'},
       {id:gid(),name:'本地支付方式',trend:'up',detail:'PIX(巴西)/OXXO(墨西哥)需适配'}
-    ]
+    ],
+    feasibility:{
+      compliance:2,localization:3,competition:2,channel:2,operation:3,
+      risks:['WhatsApp 垄断社交','汇率波动 ARPPU 不稳','葡/西两套本地化']
+    },
+    strategicValue:{
+      score:2,mode:'opportunity',
+      reasons:['ARR 小','品牌价值低']
+    }
   })},
   {key:'blank',label:'➕ 空白区域',gen:null}
 ];
@@ -455,6 +567,30 @@ function migrateState(s){
     if(r.avgLifetimeMonths==null)r.avgLifetimeMonths=8;
     if(!r.mauVars)r.mauVars=[];
     if(!r.revVars)r.revVars=[];
+    if(!r.feasibility){
+      const F={
+        china:{compliance:5,localization:1,competition:5,channel:4,operation:4,risks:['ICP 备案硬门槛','网安法+数据安全法','微信生态封禁风险','4 大应用商店碎片化']},
+        india:{compliance:3,localization:5,competition:3,channel:2,operation:3,risks:['22 种官方语言本地化 ROI 低','低 ARPU 支撑不住 CPI','DPDP Act 演进中']},
+        sea:{compliance:2,localization:4,competition:3,channel:2,operation:3,risks:['多语言宗教碎片（穆斯林/佛教/天主教）','Line/Grab/GoPay 生态','支付基础设施分化']},
+        na:{compliance:3,localization:1,competition:5,channel:2,operation:2,risks:['Tinder/Bumble/Hinge 竞品战壕深','CPI 飙高（$3-8）','订阅疲劳','窗口期 <12 月']},
+        eu:{compliance:5,localization:5,competition:4,channel:2,operation:4,risks:['⚠️ GDPR 合规 $50k+ 起步 + $10k/年维护','DSA 新规要求算法透明','24 语言 ASO','多时区客服']},
+        jpkr:{compliance:2,localization:4,competition:4,channel:3,operation:3,risks:['LINE/KakaoTalk 生态壁垒','Pairs/Between 本土竞品成熟','需深度日韩文本地化']},
+        latam:{compliance:2,localization:3,competition:2,channel:2,operation:3,risks:['WhatsApp 垄断社交','汇率波动 ARPPU 不稳','葡/西两套本地化']}
+      };
+      r.feasibility=F[r.id]||{compliance:3,localization:3,competition:3,channel:3,operation:3,risks:[]};
+    }
+    if(!r.strategicValue){
+      const S={
+        china:{score:5,mode:'retain',reasons:['营销声量','KOL 生态','反哺海外版产品迭代']},
+        india:{score:2,mode:'skip',reasons:['人口红利但 ARR 小','品牌声量弱']},
+        sea:{score:2,mode:'skip',reasons:['ARR 绝对值小','品牌声量低']},
+        na:{score:5,mode:'grow',reasons:['全球定价标杆','投资人背书','PR 天然入口']},
+        eu:{score:3,mode:'defer',reasons:['品牌背书中等','建议 Year 2 进入']},
+        jpkr:{score:4,mode:'grow',reasons:['东亚付费文化标杆','全球 ARPPU 天花板','PR 价值']},
+        latam:{score:2,mode:'opportunity',reasons:['ARR 小','品牌价值低']}
+      };
+      r.strategicValue=S[r.id]||{score:3,mode:'opportunity',reasons:[]};
+    }
   });
   s.v=SV;
 }
@@ -514,6 +650,69 @@ function calc(r){
   const score=Math.round(s1*0.5+s2*0.25+s3*0.15+s4*0.1);
   return{tamPop,samPop,samPairs,segs,somTotal,somRate,mauPairs,mauPop,payPairs,mrrW,arrW,cpi,paidInstalls,adSpendW,ltv,cac,ltvCac,payback,score};
 }
+// ===== STRATEGY UTILS =====
+function calcFeasibility(r){
+  // 5 维难度打分（每维 1-5，越高越难），加权总分范围 5-25
+  // 映射到 0-100 可行性指数：越高越容易落地
+  const f=r.feasibility||{};
+  const totalWeighted=
+    (f.compliance||0)*1.5+
+    (f.localization||0)+
+    (f.competition||0)+
+    (f.channel||0)+
+    (f.operation||0)*0.5;
+  const score=(25-totalWeighted)/20*100;
+  return Math.max(0,Math.min(100,score));
+}
+
+function simulateStrategy(region,keys){
+  const r=JSON.parse(JSON.stringify(region));
+  if(keys.includes('viral'))r.organicRate=Math.max(r.organicRate||0,70);
+  if(keys.includes('retention'))r.avgLifetimeMonths=(r.avgLifetimeMonths||0)*2;
+  if(keys.includes('pricing'))r.arppu=(r.arppu||0)*1.3;
+  return calc(r);
+}
+
+function calcOverallScore(r){
+  const c=calc(r);
+  const econ=Math.min(100,Math.max(0,(c.ltvCac/2)*50+Math.min(50,c.arrW/100)));
+  const feas=calcFeasibility(r);
+  const strat=(r.strategicValue?.score||3)*20;
+  // 综合价值得分：经济 30% + 可行性 30% + 战略 40%
+  return Math.round(econ*0.3+feas*0.3+strat*0.4);
+}
+
+function classifyRegion(r){
+  if(r.strategicValue?.mode==='retain')return 'strategic';
+  const c=calc(r);
+  if(c.ltvCac>=1.0&&c.payback<=(r.avgLifetimeMonths||1))return 'recommend';
+  const three=simulateStrategy(r,['viral','retention','pricing']);
+  if(three.ltvCac>=1.5)return 'leverage';
+  return 'skip';
+}
+
+function findMinStrategy(r){
+  const all=['viral','retention','pricing'];
+  const combos=[[],['viral'],['retention'],['pricing'],['viral','retention'],['viral','pricing'],['retention','pricing'],all];
+  for(const c of combos){
+    const res=c.length===0?calc(r):simulateStrategy(r,c);
+    if(res.ltvCac>=1.5)return{combo:c,result:res};
+  }
+  return{combo:all,result:simulateStrategy(r,all)};
+}
+
+const STRATEGY_LABELS={viral:'+病毒增长',retention:'+长留存',pricing:'+涨价 30%'};
+
+const STRATEGY_TIPS={
+  na:['订阅周年制 / 关系里程碑 / 情侣共同账户','强化情侣长期关系叙事'],
+  jpkr:['LINE 贴纸邀请 / KakaoTalk 双人空间','与 LINE / Kakao 谈深度集成'],
+  china:['小红书 KOL 情侣日记 / 七夕话题营销','低预算维持存在感，目标 <¥50万/月 × 10 万 DAU','不求 ROI 求声量，反哺海外版产品'],
+  eu:['⚠️ GDPR 合规 $50k+ 起步 + DSA 算法透明','建议北美站稳后 Year 2 进入'],
+  latam:['WhatsApp 深度集成换低成本获客','ARR 绝对值小，优先级靠后'],
+  sea:['ARPPU ¥22 支撑不住 CPI，三管齐下 L/C 1.30','等 ARPPU 翻倍或广告变现模型成熟再议'],
+  india:['ARPPU ¥18 + 付费率 3%，三管齐下 L/C 0.98 必亏','进入需"免费+广告"变现赛道']
+};
+
 function ar(){return state.regions.find(r=>r.id===state.activeRegionId)||state.regions[0]}
 function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
 
@@ -521,7 +720,7 @@ function toast(m){const e=document.getElementById('toast');e.textContent=m;e.cla
 function render(){
   const app=document.getElementById('app');
   const fid=document.activeElement?.dataset?.uid;
-  app.innerHTML=rHeader()+rToolbar()+rFunnel()+rLayers()+rSummary()+rSources();
+  app.innerHTML=rHeader()+rToolbar()+rDecisionBoard()+rStrategyAdvisor()+rFunnel()+rLayers()+rSummary()+rStrategyMatrix()+rSources();
   bind();
   if(fid){const el=document.querySelector(`[data-uid="${fid}"]`);if(el){el.focus();const l=el.value?.length;if(l!=null&&el.setSelectionRange)el.setSelectionRange(l,l)}}
   saveState();
@@ -723,6 +922,171 @@ function rLayers(){
     <div style="font-size:.7rem;color:var(--text3);margin-top:6px">得分 = LTV/CAC×50% + 回本期×25% + SOM规模×15% + ARR×10%</div>
   </div>`;
 
+  return h;
+}
+
+function rDecisionBoard(){
+  if(state.regions.length<2)return '';
+  const buckets={recommend:[],strategic:[],leverage:[],skip:[]};
+  state.regions.forEach(r=>{
+    const cls=classifyRegion(r);
+    const os=calcOverallScore(r);
+    buckets[cls].push({r,os});
+  });
+  Object.values(buckets).forEach(b=>b.sort((a,z)=>z.os-a.os));
+  const cols=[
+    {key:'recommend',icon:'🟢',label:'推荐投',desc:'L/C≥1.0 且回本期可接受',color:'recommend'},
+    {key:'strategic',icon:'🔵',label:'战略保留',desc:'非经济驱动，品牌/声量价值',color:'strategic'},
+    {key:'leverage',icon:'🟡',label:'策略可撬动',desc:'三管齐下后 L/C≥1.5',color:'leverage'},
+    {key:'skip',icon:'🔴',label:'不建议投',desc:'当前参数下难以盈利',color:'skip'}
+  ];
+  let h='<div class="decision-board"><div class="card-title"><span class="card-name">🚦 市场决策信号灯</span></div><div class="db-grid">';
+  cols.forEach(col=>{
+    h+=`<div class="db-col ${col.color}">`;
+    h+=`<div class="db-head">${col.icon} ${col.label}</div>`;
+    h+=`<div class="db-desc">${col.desc}</div>`;
+    const items=buckets[col.key];
+    if(items.length===0){
+      h+='<div class="db-item" style="color:var(--text3);font-size:.72rem">—</div>';
+    } else {
+      items.forEach(({r,os})=>{
+        h+=`<div class="db-item"><span>${esc(r.name)}</span><span class="db-score">${os}</span></div>`;
+      });
+    }
+    h+='</div>';
+  });
+  h+='</div></div>';
+  return h;
+}
+
+function rStrategyAdvisor(){
+  if(state.regions.length<2)return '';
+  const classified=state.regions.map(r=>({r,cls:classifyRegion(r),os:calcOverallScore(r)}));
+  const recommends=classified.filter(x=>x.cls==='recommend').sort((a,b)=>b.os-a.os);
+  const strategics=classified.filter(x=>x.cls==='strategic').sort((a,b)=>b.os-a.os);
+  const leverages=classified.filter(x=>x.cls==='leverage').sort((a,b)=>b.os-a.os);
+  const skips=classified.filter(x=>x.cls==='skip').sort((a,b)=>b.os-a.os);
+
+  // Top 3: fill from recommend, then strategic
+  const top3=[...recommends,...strategics].slice(0,3);
+  const medals=['gold','silver','bronze'];
+  const medalIcons=['🥇','🥈','🥉'];
+
+  let h='<div class="card" style="margin-bottom:16px"><div class="card-title"><span class="card-name">🎯 战略地图（按综合价值排序）</span></div>';
+
+  // Top 3 medals
+  top3.forEach(({r,os,cls},idx)=>{
+    const c=calc(r);
+    const econScore=Math.min(100,Math.max(0,(c.ltvCac/2)*50+Math.min(50,c.arrW/100)));
+    const feasScore=calcFeasibility(r);
+    const stratScore=(r.strategicValue?.score||3)*20;
+    const {combo,result}=findMinStrategy(r);
+    const comboLabel=combo.length===0?'现状已达标':combo.map(k=>STRATEGY_LABELS[k]||k).join(' + ');
+    const tips=(STRATEGY_TIPS[r.id]||[]).slice(0,3);
+    const risks=(r.feasibility?.risks||[]).slice(0,2);
+    const clsLabel=cls==='strategic'?'战略保留':'推荐投';
+    h+=`<div class="advisor-medal ${medals[idx]}">
+      <div class="advisor-rank">${medalIcons[idx]}</div>
+      <div class="advisor-body">
+        <div class="advisor-name">${esc(r.name)} <span style="font-size:.72rem;font-weight:400;color:var(--text3)">${clsLabel}</span></div>
+        <div class="advisor-scores">经济${Math.round(econScore)} / 可行${Math.round(feasScore)} / 战略${Math.round(stratScore)}</div>
+        <div class="advisor-play">最佳打法：${esc(comboLabel)}</div>
+        <div style="font-size:.72rem;color:var(--text3);margin-bottom:4px">L/C ${c.ltvCac.toFixed(2)} → 撬动后 ${result.ltvCac.toFixed(2)} ｜ ARR ${fm(c.arrW)} → ${fm(result.arrW)}/年</div>
+        ${tips.map(t=>`<div class="advisor-tip">💡 ${esc(t)}</div>`).join('')}
+        ${risks.map(t=>`<div class="advisor-risk">⚠️ ${esc(t)}</div>`).join('')}
+      </div>
+    </div>`;
+  });
+
+  // Strategic hold block
+  if(strategics.length>0){
+    h+='<div class="advisor-block strategic-hold"><div class="advisor-block-title">🔵 战略保留区域</div>';
+    strategics.forEach(({r,os})=>{
+      const reasons=(r.strategicValue?.reasons||[]).join('、');
+      const tips=(STRATEGY_TIPS[r.id]||[]).slice(0,3);
+      const risks=(r.feasibility?.risks||[]).slice(0,2);
+      h+=`<div style="margin-bottom:8px">
+        <span style="font-weight:600">${esc(r.name)}</span> <span class="db-score">综合${os}</span>
+        <span style="color:var(--text3);font-size:.72rem;margin-left:8px">${esc(reasons)}</span>
+        ${tips.map(t=>`<div class="advisor-tip">💡 ${esc(t)}</div>`).join('')}
+        ${risks.map(t=>`<div class="advisor-risk">⚠️ ${esc(t)}</div>`).join('')}
+      </div>`;
+    });
+    h+='</div>';
+  }
+
+  // Leverage block
+  if(leverages.length>0){
+    h+='<div class="advisor-block leverage-hold"><div class="advisor-block-title">🟡 策略可撬动但需谨慎</div>';
+    leverages.forEach(({r,os})=>{
+      const {combo,result}=findMinStrategy(r);
+      const comboLabel=combo.map(k=>STRATEGY_LABELS[k]||k).join('+');
+      const risk0=(r.feasibility?.risks||[])[0]||'';
+      const isEu=r.id==='eu';
+      h+=`<div style="margin-bottom:6px;font-size:.78rem">
+        <span style="font-weight:600">${esc(r.name)}</span> · ${esc(comboLabel||'三管齐下')} · 综合${os}
+        ${isEu?`<span class="eu-warn"> ⚠️ ${esc(risk0)}</span>`:(risk0?`<span style="color:var(--text3)"> · ${esc(risk0)}</span>`:'')}
+      </div>`;
+    });
+    h+='</div>';
+  }
+
+  // Skip block
+  if(skips.length>0){
+    h+='<div class="advisor-block skip-hold"><div class="advisor-block-title">🔴 暂不建议投</div>';
+    skips.forEach(({r,os})=>{
+      const three=simulateStrategy(r,['viral','retention','pricing']);
+      h+=`<div style="font-size:.78rem;margin-bottom:4px">
+        <span style="font-weight:600">${esc(r.name)}</span> · 综合${os} · 三管齐下 L/C ${three.ltvCac.toFixed(2)}
+      </div>`;
+    });
+    h+='</div>';
+  }
+
+  // Budget tiers
+  h+=`<div class="advisor-budget">
+    <div class="advisor-budget-title">💰 按预算分档的组合建议</div>
+    <div class="advisor-budget-item">🌱 <strong>Seed/A 轮 (&lt;$1M)</strong>：单押北美 + 中国象征性维持（月费 &lt;¥50 万）</div>
+    <div class="advisor-budget-item">🚀 <strong>A+/B 轮 ($1-3M)</strong>：北美 + 日韩 + 中国（经济 + 声量平衡）</div>
+    <div class="advisor-budget-item">🌍 <strong>B+/C 轮 (&gt;$3M)</strong>：加拉美做增量 / 观察欧洲合规窗口（Year 2）</div>
+  </div>`;
+
+  h+='</div>';
+  return h;
+}
+
+function rStrategyMatrix(){
+  if(state.regions.length<2)return '';
+  const strategies=[
+    {key:[],label:'当前'},
+    {key:['viral'],label:'+病毒增长'},
+    {key:['retention'],label:'+长留存'},
+    {key:['pricing'],label:'+涨价 30%'},
+    {key:['viral','retention','pricing'],label:'三管齐下'}
+  ];
+  function cellClass(v){
+    if(v>=1.5)return 'matrix-cell-green';
+    if(v>=1.0)return 'matrix-cell-amber';
+    return 'matrix-cell-red';
+  }
+  let h='<div class="card" style="margin-top:4px"><div class="card-title"><span class="card-name">🔧 策略杠杆对比矩阵</span></div>';
+  h+='<div style="overflow-x:auto"><table class="matrix-table"><thead><tr>';
+  h+='<th>区域</th>';
+  strategies.forEach((s,i)=>{
+    h+=`<th${i===strategies.length-1?' style="font-weight:700"':''}>${esc(s.label)}</th>`;
+  });
+  h+='</tr></thead><tbody>';
+  state.regions.forEach(r=>{
+    h+=`<tr><td>${esc(r.name)}</td>`;
+    strategies.forEach((s,i)=>{
+      const res=s.key.length===0?calc(r):simulateStrategy(r,s.key);
+      const v=res.ltvCac;
+      const cls=cellClass(v)+(i===strategies.length-1?' three-all':'');
+      h+=`<td class="${cls}">${v.toFixed(2)}</td>`;
+    });
+    h+='</tr>';
+  });
+  h+='</tbody></table></div></div>';
   return h;
 }
 
