@@ -170,14 +170,17 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;hei
 function defaultChina() {
   return {
     id:'china', name:'中国',
-    tam:{ population:4.5, description:'18-35岁适龄婚恋人口（约4.5-5亿）', source:'国家统计局第七次人口普查数据（2020）' },
-    tamToSamRate:40,
+    tam:{ population:3.8, description:'18-35岁适龄人口（七普口径推算至2026，1985-2002年出生段自然衰减）', source:'国家统计局第七次人口普查（2020）+ 年度推算' },
+    tamToSamRate:45,
+    samToSomRate:20,
     segments:[
       {id:'s1',name:'异地恋情侣',rate:30,painPoint:'缺乏陪伴感、安全感',features:'实时状态同步、虚拟约会、倒计时'},
-      {id:'s2',name:'大学生情侣',rate:17,painPoint:'共同成长、异地毕业分离',features:'情侣日记、学习打卡、未来规划'},
-      {id:'s3',name:'职场新人情侣',rate:39,painPoint:'时间少、压力大',features:'快速互动、减压游戏、周末约会推荐'}
+      {id:'s2',name:'大学生情侣',rate:20,painPoint:'共同成长、异地毕业分离',features:'情侣日记、学习打卡、未来规划'},
+      {id:'s3',name:'职场新人情侣',rate:35,painPoint:'时间少、压力大',features:'快速互动、减压游戏、周末约会推荐'},
+      {id:'s4',name:'其他情侣',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:2, payingRate:10, arppu:40,
+    penetrationRate:2, payingRate:4, arppu:40,
+    cpi:15, installToMauRate:30, organicRate:50, avgLifetimeMonths:8,
     tamVars:[
       {id:'v1',name:'人口出生率',trend:'down',detail:'逐年下降，18-35岁存量逐年缩减'},
       {id:'v2',name:'人口年龄结构',trend:'down',detail:'85-02年出生人口从高峰2500万/年降至1600万/年'}
@@ -218,13 +221,16 @@ const PRESETS=[
   {key:'india',label:'🇮🇳 南亚 / 印度',gen:()=>({
     id:gid(),name:'南亚 / 印度',
     tam:{population:6.0,description:'18-35岁年轻人口（印度为主，含巴基斯坦、孟加拉等）',source:'UN World Population Prospects 2024'},
-    tamToSamRate:35,
+    tamToSamRate:40,
+    samToSomRate:12,
     segments:[
-      {id:gid(),name:'异地恋情侣',rate:25,painPoint:'跨城市/邦际距离、基础设施差距',features:'低带宽视频适配、离线消息、语音优先'},
-      {id:gid(),name:'大学生情侣',rate:15,painPoint:'家庭文化压力、跨校异地',features:'隐私保护、匿名空间、校园社交'},
-      {id:gid(),name:'IT/职场新人',rate:30,painPoint:'高流动性（IT行业跨城市）',features:'日程同步、快速互动、城市生活推荐'}
+      {id:gid(),name:'异地恋情侣',rate:30,painPoint:'跨城市/邦际距离、基础设施差距',features:'低带宽视频适配、离线消息、语音优先'},
+      {id:gid(),name:'大学生情侣',rate:20,painPoint:'家庭文化压力、跨校异地',features:'隐私保护、匿名空间、校园社交'},
+      {id:gid(),name:'IT/职场新人',rate:35,painPoint:'高流动性（IT行业跨城市）',features:'日程同步、快速互动、城市生活推荐'},
+      {id:gid(),name:'其他',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:1,payingRate:5,arppu:20,
+    penetrationRate:1.5,payingRate:3,arppu:18,
+    cpi:5, installToMauRate:25, organicRate:55, avgLifetimeMonths:6,
     tamVars:[
       {id:gid(),name:'人口红利',trend:'up',detail:'印度中位年龄28岁，全球最年轻的大型经济体'},
       {id:gid(),name:'城镇化加速',trend:'up',detail:'城镇人口35%→预计2030年40%+，年轻人口向城市集中'}
@@ -255,13 +261,16 @@ const PRESETS=[
   {key:'sea',label:'🇮🇩 东南亚',gen:()=>({
     id:gid(),name:'东南亚',
     tam:{population:1.75,description:'18-35岁年轻人口（印尼、菲律宾、越南、泰国等）',source:'UN World Population Prospects 2024'},
-    tamToSamRate:40,
+    tamToSamRate:45,
+    samToSomRate:18,
     segments:[
-      {id:gid(),name:'异地恋/跨国情侣',rate:30,painPoint:'OFW海外劳工跨国异地、岛屿间距离',features:'跨时区提醒、低成本视频通话'},
-      {id:gid(),name:'大学生情侣',rate:12,painPoint:'家庭经济压力、城乡差距',features:'免费核心功能、校园社群'},
-      {id:gid(),name:'职场新人情侣',rate:30,painPoint:'加班文化、城市生活成本高',features:'快速互动、约会推荐、减压小游戏'}
+      {id:gid(),name:'异地恋/跨国情侣',rate:35,painPoint:'OFW海外劳工跨国异地、岛屿间距离',features:'跨时区提醒、低成本视频通话'},
+      {id:gid(),name:'大学生情侣',rate:20,painPoint:'家庭经济压力、城乡差距',features:'免费核心功能、校园社群'},
+      {id:gid(),name:'职场新人情侣',rate:30,painPoint:'加班文化、城市生活成本高',features:'快速互动、约会推荐、减压小游戏'},
+      {id:gid(),name:'其他',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:2,payingRate:8,arppu:25,
+    penetrationRate:2,payingRate:5,arppu:22,
+    cpi:10, installToMauRate:28, organicRate:55, avgLifetimeMonths:7,
     tamVars:[
       {id:gid(),name:'年轻人口占比',trend:'up',detail:'中位年龄29岁，18-35岁人口基数大'}
     ],
@@ -288,12 +297,15 @@ const PRESETS=[
     id:gid(),name:'北美',
     tam:{population:0.87,description:'18-35岁年轻人口（美国+加拿大）',source:'US Census Bureau / Statistics Canada 2024'},
     tamToSamRate:50,
+    samToSomRate:25,
     segments:[
-      {id:gid(),name:'异地恋情侣',rate:20,painPoint:'跨州/跨加美边境距离',features:'虚拟约会、旅行计划、倒计时'},
-      {id:gid(),name:'大学生情侣',rate:15,painPoint:'毕业后分离、学业压力',features:'情侣空间、共享日历、纪念日'},
-      {id:gid(),name:'职场新人情侣',rate:35,painPoint:'工作生活平衡、约会疲劳',features:'约会推荐、减压互动、周末计划'}
+      {id:gid(),name:'异地恋情侣',rate:25,painPoint:'跨州/跨加美边境距离',features:'虚拟约会、旅行计划、倒计时'},
+      {id:gid(),name:'大学生情侣',rate:20,painPoint:'毕业后分离、学业压力',features:'情侣空间、共享日历、纪念日'},
+      {id:gid(),name:'职场新人情侣',rate:40,painPoint:'工作生活平衡、约会疲劳',features:'约会推荐、减压互动、周末计划'},
+      {id:gid(),name:'其他',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:3,payingRate:15,arppu:80,
+    penetrationRate:3,payingRate:10,arppu:80,
+    cpi:40, installToMauRate:35, organicRate:40, avgLifetimeMonths:10,
     tamVars:[
       {id:gid(),name:'人口增长放缓',trend:'down',detail:'美国出生率持续下降，18-35岁占比收缩'},
       {id:gid(),name:'移民补充',trend:'up',detail:'合法移民每年约100万，年轻劳动力补充'}
@@ -321,13 +333,16 @@ const PRESETS=[
   {key:'eu',label:'🇪🇺 欧洲',gen:()=>({
     id:gid(),name:'欧洲',
     tam:{population:0.95,description:'18-35岁年轻人口（欧盟+英国）',source:'Eurostat Population Statistics 2024'},
-    tamToSamRate:45,
+    tamToSamRate:50,
+    samToSomRate:20,
     segments:[
-      {id:gid(),name:'跨国恋情侣',rate:25,painPoint:'欧盟内跨国流动频繁、语言差异',features:'多语言支持、跨时区功能'},
-      {id:gid(),name:'大学生情侣',rate:12,painPoint:'Erasmus交换项目后异地',features:'情侣空间、旅行计划'},
-      {id:gid(),name:'职场青年',rate:30,painPoint:'欧洲工作文化差异、远程办公兴起',features:'共享日历、周末计划推荐'}
+      {id:gid(),name:'跨国恋情侣',rate:30,painPoint:'欧盟内跨国流动频繁、语言差异',features:'多语言支持、跨时区功能'},
+      {id:gid(),name:'大学生情侣',rate:20,painPoint:'Erasmus交换项目后异地',features:'情侣空间、旅行计划'},
+      {id:gid(),name:'职场青年',rate:35,painPoint:'欧洲工作文化差异、远程办公兴起',features:'共享日历、周末计划推荐'},
+      {id:gid(),name:'其他',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:2,payingRate:12,arppu:60,
+    penetrationRate:2,payingRate:8,arppu:60,
+    cpi:35, installToMauRate:32, organicRate:45, avgLifetimeMonths:9,
     tamVars:[
       {id:gid(),name:'人口老龄化',trend:'down',detail:'18-35岁占比持续萎缩，存量竞争'}
     ],
@@ -352,13 +367,16 @@ const PRESETS=[
   {key:'jpkr',label:'🇯🇵 日韩',gen:()=>({
     id:gid(),name:'日韩',
     tam:{population:0.32,description:'18-35岁年轻人口（日本+韩国）',source:'Statistics Japan / KOSIS 2024'},
-    tamToSamRate:30,
+    tamToSamRate:35,
+    samToSomRate:15,
     segments:[
-      {id:gid(),name:'异地恋情侣',rate:20,painPoint:'东京/首尔单极化，地方青年流入大城市',features:'虚拟约会、陪伴感功能'},
-      {id:gid(),name:'大学生情侣',rate:15,painPoint:'就活/考试压力、社交焦虑',features:'低压互动、匿名情侣空间'},
-      {id:gid(),name:'社畜情侣',rate:30,painPoint:'极端加班文化、约会时间极少',features:'3秒快速互动、自动纪念日提醒'}
+      {id:gid(),name:'异地恋情侣',rate:25,painPoint:'东京/首尔单极化，地方青年流入大城市',features:'虚拟约会、陪伴感功能'},
+      {id:gid(),name:'大学生情侣',rate:20,painPoint:'就活/考试压力、社交焦虑',features:'低压互动、匿名情侣空间'},
+      {id:gid(),name:'社畜情侣',rate:40,painPoint:'极端加班文化、约会时间极少',features:'3秒快速互动、自动纪念日提醒'},
+      {id:gid(),name:'其他',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:3,payingRate:12,arppu:50,
+    penetrationRate:3,payingRate:12,arppu:70,
+    cpi:50, installToMauRate:38, organicRate:35, avgLifetimeMonths:12,
     tamVars:[
       {id:gid(),name:'少子化危机',trend:'down',detail:'日本出生率0.72，韩国0.65，18-35岁人口持续萎缩'}
     ],
@@ -382,14 +400,17 @@ const PRESETS=[
   })},
   {key:'latam',label:'🇧🇷 拉丁美洲',gen:()=>({
     id:gid(),name:'拉丁美洲',
-    tam:{population:1.6,description:'18-35岁年轻人口（巴西、墨西哥、阿根廷、哥伦比亚等）',source:'UN World Population Prospects 2024'},
-    tamToSamRate:45,
+    tam:{population:1.5,description:'18-35岁年轻人口（巴西、墨西哥、阿根廷、哥伦比亚等）',source:'UN World Population Prospects 2024'},
+    tamToSamRate:50,
+    samToSomRate:18,
     segments:[
-      {id:gid(),name:'异地恋情侣',rate:25,painPoint:'国内城市间距离大、跨国移民',features:'低带宽适配、语音消息优先'},
-      {id:gid(),name:'大学生情侣',rate:10,painPoint:'经济不稳定、公立大学远距离通勤',features:'免费核心功能、校园活动'},
-      {id:gid(),name:'职场青年情侣',rate:30,painPoint:'通勤时间长、生活成本上升',features:'快速互动、周末约会推荐'}
+      {id:gid(),name:'异地恋情侣',rate:30,painPoint:'国内城市间距离大、跨国移民',features:'低带宽适配、语音消息优先'},
+      {id:gid(),name:'大学生情侣',rate:20,painPoint:'经济不稳定、公立大学远距离通勤',features:'免费核心功能、校园活动'},
+      {id:gid(),name:'职场青年情侣',rate:35,painPoint:'通勤时间长、生活成本上升',features:'快速互动、周末约会推荐'},
+      {id:gid(),name:'其他',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:2,payingRate:8,arppu:30,
+    penetrationRate:2,payingRate:5,arppu:25,
+    cpi:8, installToMauRate:28, organicRate:55, avgLifetimeMonths:7,
     tamVars:[
       {id:gid(),name:'年轻人口结构',trend:'up',detail:'中位年龄30岁，数字化转型期'}
     ],
@@ -416,17 +437,22 @@ const PRESETS=[
 
 // ===== STATE =====
 let uid=1000; const gid=()=>'id_'+(uid++);
-const SV=3;
+const SV=4;
 let state=loadState()||{v:SV,regions:[defaultChina()],activeRegionId:'china'};
 migrateState(state);
 
-function loadState(){try{const s=localStorage.getItem('cmc3');if(!s)return null;const d=JSON.parse(s);if(d.v!==SV)return null;return d}catch{return null}}
-function saveState(){try{localStorage.setItem('cmc3',JSON.stringify(state))}catch{}}
+function loadState(){try{const s=localStorage.getItem('cmc4');if(!s)return null;const d=JSON.parse(s);if(d.v!==SV)return null;return d}catch{return null}}
+function saveState(){try{localStorage.setItem('cmc4',JSON.stringify(state))}catch{}}
 function migrateState(s){
   s.regions.forEach(r=>{
-    if(r.penetrationRate==null)r.penetrationRate=5;
-    if(r.payingRate==null)r.payingRate=8;
-    if(r.arppu==null)r.arppu=15;
+    if(r.penetrationRate==null)r.penetrationRate=2;
+    if(r.payingRate==null)r.payingRate=4;
+    if(r.arppu==null)r.arppu=40;
+    if(r.samToSomRate==null)r.samToSomRate=20;
+    if(r.cpi==null)r.cpi=15;
+    if(r.installToMauRate==null)r.installToMauRate=30;
+    if(r.organicRate==null)r.organicRate=50;
+    if(r.avgLifetimeMonths==null)r.avgLifetimeMonths=8;
     if(!r.mauVars)r.mauVars=[];
     if(!r.revVars)r.revVars=[];
   });
@@ -462,15 +488,31 @@ function calc(r){
   const tamPop=r.tam.population||0;
   const samPop=tamPop*r.tamToSamRate/100;
   const samPairs=samPop/2;
-  let somTotal=0;
-  const segs=r.segments.map(s=>{const p=samPairs*s.rate/100;somTotal+=p;return{...s,pairs:p}});
-  const somRate=samPairs>0?(somTotal/samPairs*100):0;
+  const somTotal=samPairs*(r.samToSomRate||0)/100;
+  const segs=r.segments.map(s=>{const p=somTotal*s.rate/100;return{...s,pairs:p}});
+  const somRate=r.samToSomRate||0;
   const mauPairs=somTotal*(r.penetrationRate||0)/100;
   const mauPop=mauPairs*2;
   const payPairs=mauPairs*(r.payingRate||0)/100;
   const mrrW=payPairs*10000*(r.arppu||0);
   const arrW=mrrW*12;
-  return{tamPop,samPop,samPairs,segs,somTotal,somRate,mauPairs,mauPop,payPairs,mrrW,arrW};
+  // 获客经济学：假设每对 MAU 需 1 个 paid install（另一半通过邀请），扣除 organic 后
+  const cpi=r.cpi||0;
+  const i2m=(r.installToMauRate||30)/100;
+  const org=(r.organicRate||0)/100;
+  const paidInstalls=i2m>0?mauPairs*(1-org)/i2m:0;
+  const adSpendW=paidInstalls*cpi/10000;
+  const ltv=(r.arppu||0)*(r.avgLifetimeMonths||0);
+  const cac=payPairs>0?adSpendW*10000/payPairs:0;
+  const ltvCac=cac>0?ltv/cac:0;
+  const payback=(r.arppu||0)>0?cac/(r.arppu||0):0;
+  // 市场得分：LTV/CAC 50% + 回本期 25% + SOM 规模 15% + ARR 10%
+  const s1=Math.min(100,(ltvCac/3)*100);
+  const s2=payback>0?Math.max(0,100-payback*6):0;
+  const s3=Math.min(100,somTotal/0.2*100);
+  const s4=Math.min(100,arrW/5000*100);
+  const score=Math.round(s1*0.5+s2*0.25+s3*0.15+s4*0.1);
+  return{tamPop,samPop,samPairs,segs,somTotal,somRate,mauPairs,mauPop,payPairs,mrrW,arrW,cpi,paidInstalls,adSpendW,ltv,cac,ltvCac,payback,score};
 }
 function ar(){return state.regions.find(r=>r.id===state.activeRegionId)||state.regions[0]}
 function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
@@ -606,17 +648,24 @@ function rLayers(){
     <div style="display:flex;gap:20px;margin-top:5px;flex-wrap:wrap"><div><span class="computed">${fp(tSam)}人</span> <span class="unit">${multi?'全区域 ':''}个体数</span></div><div><span class="computed">${fpr(tSamP)}</span> <span class="unit">${multi?'全区域 ':''}情侣/夫妻对数</span></div></div></div>
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（TAM→SAM）</span></div>${rVars(r.samVars,'samVars')}</div>`;
 
-  // SAM→SOM
-  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>细分场景拆解</span></div><div class="arrow-line"></div></div>`;
+  // SAM→SOM 转化率
+  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>意愿+触达率</span>
+    <div class="slider-row"><input type="range" min="0" max="100" value="${r.samToSomRate||0}" data-action="s2srs" data-uid="s2srs"><input class="inp sm" type="number" min="0" max="100" step="0.5" value="${r.samToSomRate||0}" data-action="s2sr" data-uid="s2sr"><span class="unit">%</span></div>
+  </div><div class="arrow-line"></div></div>`;
 
   // SOM
+  const segSum=c.segs.reduce((a,s)=>a+(s.rate||0),0);
   const segsH=c.segs.map(s=>
     `<div class="seg"><div class="seg-head"><input class="seg-name" type="text" value="${esc(s.name)}" data-action="segname" data-sid="${s.id}" data-uid="sn_${s.id}"><button class="xbtn btn-danger" data-action="segrm" data-sid="${s.id}">&times;</button></div>
-    <div class="row"><span class="lbl">占 SAM %</span><div class="slider-row"><input type="range" min="0" max="100" value="${s.rate}" data-action="segrs" data-sid="${s.id}" data-uid="sr_${s.id}"><input class="inp sm" type="number" min="0" max="100" step="1" value="${s.rate}" data-action="segr" data-sid="${s.id}" data-uid="sri_${s.id}"><span class="unit">%</span></div><span class="computed" style="margin-left:6px">${fpr(s.pairs)}</span></div>
+    <div class="row"><span class="lbl">占 SOM %</span><div class="slider-row"><input type="range" min="0" max="100" value="${s.rate}" data-action="segrs" data-sid="${s.id}" data-uid="sr_${s.id}"><input class="inp sm" type="number" min="0" max="100" step="1" value="${s.rate}" data-action="segr" data-sid="${s.id}" data-uid="sri_${s.id}"><span class="unit">%</span></div><span class="computed" style="margin-left:6px">${fpr(s.pairs)}</span></div>
     <div class="seg-grid"><div class="seg-field"><label>核心痛点</label><input type="text" value="${esc(s.painPoint)}" data-action="segpain" data-sid="${s.id}" data-uid="sp_${s.id}"></div><div class="seg-field"><label>机会功能</label><input type="text" value="${esc(s.features)}" data-action="segfeat" data-sid="${s.id}" data-uid="sf_${s.id}"></div></div></div>`
   ).join('');
 
+  const segWarn=Math.abs(segSum-100)>1?`<div style="font-size:.7rem;color:var(--amber);margin-top:4px">⚠ 场景占比总和 ${segSum}%，建议归一化到 100%</div>`:'';
+
   h+=`<div class="card"><div class="card-title"><span class="badge som">SOM</span><span class="card-name">可获得市场</span></div>
+    <div class="cblock"><div class="formula">${esc(r.name)}: SAM × 意愿率 = ${fpr(c.samPairs)} × ${r.samToSomRate||0}% = ${fpr(c.somTotal)}</div></div>
+    <div style="font-size:.72rem;color:var(--text3);margin:8px 0 4px">场景结构（SOM 内部占比，仅作展示）${segWarn}</div>
     ${segsH}<div style="margin:6px 0"><button class="btn btn-sm btn-accent" data-action="segadd">+ 添加场景</button></div>
     <div class="cblock"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><div><span class="lbl">${multi?'全区域 ':''}SOM 合计</span> <span class="computed">${fpr(tSom)}</span></div><div><span class="lbl">占 SAM</span> <span class="computed">${(tSamP>0?(tSom/tSamP*100):0).toFixed(1)}%</span></div></div></div>
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（SAM→SOM）</span></div>${rVars(r.somVars,'somVars')}</div>`;
@@ -650,27 +699,62 @@ function rLayers(){
     </div></div>
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（MAU→营收）</span></div>${rVars(r.revVars,'revVars')}</div>`;
 
+  // ── 获客经济学 ──
+  const health=c.ltvCac>=3?'green':c.ltvCac>=1?'amber':'rose';
+  const healthTxt=c.ltvCac>=3?'🟢 健康':c.ltvCac>=1?'🟡 临界':'🔴 亏损';
+  const healthColor=c.ltvCac>=3?'var(--green)':c.ltvCac>=1?'var(--amber)':'var(--rose)';
+  const payColor=c.payback<=12?'var(--green)':c.payback<=24?'var(--amber)':'var(--rose)';
+  h+=`<div class="card" style="margin-top:12px"><div class="card-title"><span class="badge" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">CAC</span><span class="card-name">获客经济学 · 市场健康度</span></div>
+    <div class="row"><span class="lbl">CPI</span><input class="inp sm" type="number" min="0" step="0.5" value="${r.cpi||0}" data-action="cpi" data-uid="cpi"><span class="unit">元/install</span>
+      <span class="lbl" style="margin-left:12px">Install→MAU</span><input class="inp sm" type="number" min="0" max="100" step="1" value="${r.installToMauRate||0}" data-action="i2m" data-uid="i2m"><span class="unit">%</span></div>
+    <div class="row"><span class="lbl">有机占比</span><input class="inp sm" type="number" min="0" max="100" step="1" value="${r.organicRate||0}" data-action="org" data-uid="org"><span class="unit">% (自然+病毒)</span>
+      <span class="lbl" style="margin-left:12px">付费生命周期</span><input class="inp sm" type="number" min="1" step="1" value="${r.avgLifetimeMonths||0}" data-action="lt" data-uid="lt"><span class="unit">个月</span></div>
+    <div class="cblock" style="background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.12);margin-top:10px">
+      <div class="formula">买量 Install = MAU对 × (1-有机率) / 留存率 = ${fpr(c.mauPairs)} × ${(100-(r.organicRate||0))}% / ${r.installToMauRate||0}% ≈ ${c.paidInstalls<1e4?c.paidInstalls.toFixed(0)+'人':c.paidInstalls<1e8?(c.paidInstalls/1e4).toFixed(1)+'万人':(c.paidInstalls/1e8).toFixed(2)+'亿人'}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:8px">
+        <div><div class="unit" style="font-size:.7rem">年买量预算</div><div class="computed" style="color:#7c3aed">${fm(c.adSpendW*12)}/年</div></div>
+        <div><div class="unit" style="font-size:.7rem">LTV / 付费对</div><div class="computed" style="color:var(--green)">¥${c.ltv.toFixed(0)}</div></div>
+        <div><div class="unit" style="font-size:.7rem">CAC / 付费对</div><div class="computed" style="color:#7c3aed">¥${c.cac<1?'—':c.cac.toFixed(0)}</div></div>
+        <div><div class="unit" style="font-size:.7rem">LTV / CAC</div><div class="computed" style="color:${healthColor}">${c.ltvCac.toFixed(2)} ${healthTxt}</div></div>
+        <div><div class="unit" style="font-size:.7rem">回本周期</div><div class="computed" style="color:${payColor}">${c.payback<1?'—':c.payback.toFixed(1)+' 月'}</div></div>
+        <div><div class="unit" style="font-size:.7rem">市场得分</div><div class="computed" style="color:var(--accent);font-size:1.1rem">${c.score} / 100</div></div>
+      </div>
+    </div>
+    <div style="font-size:.7rem;color:var(--text3);margin-top:6px">得分 = LTV/CAC×50% + 回本期×25% + SOM规模×15% + ARR×10%</div>
+  </div>`;
+
   return h;
 }
 
 function rSummary(){
   if(state.regions.length<2)return '';
   let tt=0,ts=0,to=0,tm=0,ta=0;
-  const rows=state.regions.map(r=>{
-    const c=calc(r);tt+=c.tamPop;ts+=c.samPop;to+=c.somTotal;tm+=c.mauPairs;ta+=c.arrW;
-    return `<tr><td>${esc(r.name)}</td><td class="n">${fp(c.tamPop)}人</td><td class="n">${fpr(c.samPairs)}</td><td class="n">${fpr(c.somTotal)}</td><td class="n">${fpr(c.mauPairs)}</td><td class="n">${fm(c.arrW)}/年</td></tr>`;
+  const rows=state.regions.map(r=>({r,c:calc(r)}));
+  // 按得分排序，追加排名
+  const ranked=[...rows].sort((a,b)=>b.c.score-a.c.score);
+  const rank=new Map();ranked.forEach((x,i)=>rank.set(x.r.id,i+1));
+  const rowsH=rows.map(({r,c})=>{
+    tt+=c.tamPop;ts+=c.samPop;to+=c.somTotal;tm+=c.mauPairs;ta+=c.arrW;
+    const healthColor=c.ltvCac>=3?'var(--green)':c.ltvCac>=1?'var(--amber)':'var(--rose)';
+    const rk=rank.get(r.id);
+    const rkBadge=rk===1?'🥇':rk===2?'🥈':rk===3?'🥉':`#${rk}`;
+    return `<tr><td>${rkBadge} ${esc(r.name)}</td><td class="n">${fpr(c.somTotal)}</td><td class="n">¥${c.cpi}</td><td class="n">¥${c.cac<1?'—':c.cac.toFixed(0)}</td><td class="n">¥${c.ltv.toFixed(0)}</td><td class="n" style="color:${healthColor};font-weight:600">${c.ltvCac.toFixed(2)}</td><td class="n">${c.payback<1?'—':c.payback.toFixed(1)+'月'}</td><td class="n">${fm(c.arrW)}/年</td><td class="n" style="font-weight:700;color:var(--accent)">${c.score}</td></tr>`;
   }).join('');
-  return `<div class="card" style="margin-top:16px"><div class="card-title"><span class="card-name">多区域对比汇总</span></div>
-    <table class="stable"><thead><tr><th>区域</th><th class="n">TAM</th><th class="n">SAM</th><th class="n">SOM</th><th class="n">MAU</th><th class="n">ARR</th></tr></thead>
-    <tbody>${rows}<tr><td>合计</td><td class="n">${fp(tt)}人</td><td class="n">${fpr(ts/2)}</td><td class="n">${fpr(to)}</td><td class="n">${fpr(tm)}</td><td class="n">${fm(ta)}/年</td></tr></tbody></table></div>`;
+  return `<div class="card" style="margin-top:16px"><div class="card-title"><span class="card-name">多区域市场健康度对比（按得分排名）</span></div>
+    <div style="overflow-x:auto"><table class="stable"><thead><tr><th>区域</th><th class="n">SOM</th><th class="n">CPI</th><th class="n">CAC</th><th class="n">LTV</th><th class="n">LTV/CAC</th><th class="n">回本期</th><th class="n">ARR</th><th class="n">得分</th></tr></thead>
+    <tbody>${rowsH}</tbody></table></div>
+    <div style="font-size:.7rem;color:var(--text3);margin-top:8px">LTV/CAC ≥3 🟢 健康 · 1-3 🟡 临界 · &lt;1 🔴 亏损 ｜ 回本期 ≤12月 🟢 · 12-24月 🟡 · &gt;24月 🔴</div></div>`;
 }
 
 function rSources(){
-  return `<div class="sources"><h3>数据来源参考</h3><ul>
-    <li>国家统计局第七次人口普查数据（2020）</li>
-    <li>心理中国《2024年普通成年人与大学生婚恋心理报告》</li>
-    <li>教育部2024年全国教育事业发展统计公报</li>
-    <li>MAU 渗透率与 ARPPU 为产品假设值，需根据实际运营数据调整</li></ul></div>`;
+  return `<div class="sources"><h3>数据来源参考 & 基准说明</h3><ul>
+    <li>人口：国家统计局第七次人口普查（2020）· UN WPP 2024 · Eurostat · US Census · Statistics Japan/KOSIS 2024</li>
+    <li>恋爱意愿：心理中国《2024成年人与大学生婚恋心理报告》· Pew Research · 国立社会保障・人口問題研究所</li>
+    <li>CPI 基准：AppsFlyer / Liftoff / data.ai 2024 移动归因报告 — 中国¥10-25、印度¥3-10、东南亚¥7-15、北美¥25-60、欧洲¥25-50、日韩¥40-80、拉美¥5-15</li>
+    <li>次月留存：行业平均约会/社交类 25-38%（Adjust 2024）</li>
+    <li>付费率基准：探探/Soul 3-5%、Tinder 5-8%、Bumble 8-12%、Pairs/Between 10-15%</li>
+    <li>有机占比：情侣产品 K因子天然偏高（双向邀请机制），40-60% 合理</li>
+    <li>⚠ 渗透率、生命周期为产品假设值，需上线后 3-6 个月实际数据校准</li></ul></div>`;
 }
 
 // ===== EVENTS =====
@@ -685,7 +769,7 @@ function bind(){
 }
 
 function syncSlider(action,sid,val){
-  const pairs={convs:'conv',conv:'convs',penrs:'penr',penr:'penrs',payrs:'payr',payr:'payrs',segrs:'segr',segr:'segrs'};
+  const pairs={convs:'conv',conv:'convs',penrs:'penr',penr:'penrs',payrs:'payr',payr:'payrs',segrs:'segr',segr:'segrs',s2srs:'s2sr',s2sr:'s2srs'};
   const other=pairs[action];if(!other)return;
   const sel=sid?`[data-action="${other}"][data-sid="${sid}"]`:`[data-action="${other}"]`;
   const el=document.querySelector(sel);if(el)el.value=val;
@@ -699,9 +783,14 @@ function onInput(e){
   else if(a==='tamsrc'){r.tam.source=el.value;saveState();return}
   else if(a==='rname'){r.name=el.value}
   else if(a==='conv'||a==='convs'){r.tamToSamRate=Math.max(0,Math.min(100,parseFloat(el.value)||0));syncSlider(a,null,r.tamToSamRate)}
+  else if(a==='s2sr'||a==='s2srs'){r.samToSomRate=Math.max(0,Math.min(100,parseFloat(el.value)||0));syncSlider(a,null,r.samToSomRate)}
   else if(a==='penr'||a==='penrs'){r.penetrationRate=Math.max(0,Math.min(100,parseFloat(el.value)||0));syncSlider(a,null,r.penetrationRate)}
   else if(a==='payr'||a==='payrs'){r.payingRate=Math.max(0,Math.min(100,parseFloat(el.value)||0));syncSlider(a,null,r.payingRate)}
   else if(a==='arppu'){r.arppu=Math.max(0,parseFloat(el.value)||0)}
+  else if(a==='cpi'){r.cpi=Math.max(0,parseFloat(el.value)||0)}
+  else if(a==='i2m'){r.installToMauRate=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='org'){r.organicRate=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='lt'){r.avgLifetimeMonths=Math.max(1,parseFloat(el.value)||0)}
   else if(a==='segr'||a==='segrs'){const s=r.segments.find(x=>x.id===el.dataset.sid);if(s){s.rate=Math.max(0,Math.min(100,parseFloat(el.value)||0));syncSlider(a,s.id,s.rate)}}
   else if(a==='segname'){const s=r.segments.find(x=>x.id===el.dataset.sid);if(s){s.name=el.value;saveState();return}}
   else if(a==='segpain'){const s=r.segments.find(x=>x.id===el.dataset.sid);if(s){s.painPoint=el.value;saveState();return}}
@@ -723,7 +812,7 @@ function onClick(e){
   if(a==='sw-region'){state.activeRegionId=el.dataset.id;render()}
   else if(a==='rm-region'){e.stopPropagation();if(state.regions.length<=1)return;state.regions=state.regions.filter(r=>r.id!==el.dataset.id);if(state.activeRegionId===el.dataset.id)state.activeRegionId=state.regions[0].id;render();toast('已删除区域')}
   else if(a==='toggle-presets'){const m=document.getElementById('presetMenu');m.classList.toggle('open');const cl=ev=>{if(!el.parentElement.contains(ev.target)){m.classList.remove('open');document.removeEventListener('click',cl)}};setTimeout(()=>document.addEventListener('click',cl),0)}
-  else if(a==='add-preset'){const p=PRESETS.find(x=>x.key===el.dataset.key);let nr;if(p&&p.gen){nr=p.gen();nr.id=gid();nr.segments.forEach(s=>s.id=gid());['tamVars','samVars','somVars','mauVars','revVars'].forEach(k=>(nr[k]||[]).forEach(v=>v.id=gid()))}else{nr={id:gid(),name:'新区域',tam:{population:0,description:'',source:''},tamToSamRate:30,segments:[],penetrationRate:5,payingRate:8,arppu:15,tamVars:[],samVars:[],somVars:[],mauVars:[],revVars:[]};}{const base=nr.name;let n=2;while(state.regions.some(r=>r.name===nr.name)){nr.name=base+' ('+n+')';n++}}state.regions.push(nr);state.activeRegionId=nr.id;document.getElementById('presetMenu')?.classList.remove('open');render();toast('已添加: '+nr.name)}
+  else if(a==='add-preset'){const p=PRESETS.find(x=>x.key===el.dataset.key);let nr;if(p&&p.gen){nr=p.gen();nr.id=gid();nr.segments.forEach(s=>s.id=gid());['tamVars','samVars','somVars','mauVars','revVars'].forEach(k=>(nr[k]||[]).forEach(v=>v.id=gid()))}else{nr={id:gid(),name:'新区域',tam:{population:0,description:'',source:''},tamToSamRate:40,samToSomRate:20,segments:[],penetrationRate:2,payingRate:4,arppu:40,cpi:15,installToMauRate:30,organicRate:50,avgLifetimeMonths:8,tamVars:[],samVars:[],somVars:[],mauVars:[],revVars:[]};}{const base=nr.name;let n=2;while(state.regions.some(r=>r.name===nr.name)){nr.name=base+' ('+n+')';n++}}state.regions.push(nr);state.activeRegionId=nr.id;document.getElementById('presetMenu')?.classList.remove('open');render();toast('已添加: '+nr.name)}
   else if(a==='dup-region'){const src=ar(),id=gid(),d=JSON.parse(JSON.stringify(src));d.id=id;d.name=src.name+' (副本)';d.segments.forEach(s=>s.id=gid());['tamVars','samVars','somVars','mauVars','revVars'].forEach(k=>(d[k]||[]).forEach(v=>v.id=gid()));state.regions.push(d);state.activeRegionId=id;render();toast('已复制区域')}
   else if(a==='segadd'){ar().segments.push({id:gid(),name:'新场景',rate:10,painPoint:'',features:''});render()}
   else if(a==='segrm'){const r=ar();r.segments=r.segments.filter(s=>s.id!==el.dataset.sid);render()}
@@ -743,16 +832,23 @@ function doExport(){
     t+=`【${r.name}】\n`;
     t+=`TAM（总体适龄市场）: ${fp(c.tamPop)}人\n  ${r.tam.description}\n  来源: ${r.tam.source}\n\n`;
     t+=`TAM → SAM 转化率: ${r.tamToSamRate}%\n`;
-    t+=`SAM（可服务市场）: ${fp(c.samPop)}人 | ${fpr(c.samPairs)}\n\n`;
-    t+=`SOM（可获得市场）:\n`;
-    c.segs.forEach(s=>{t+=`  · ${s.name}: ${s.rate}% → ${fpr(s.pairs)}\n`});
-    t+=`  合计: ${fpr(c.somTotal)}（占SAM ${c.somRate.toFixed(1)}%）\n\n`;
-    t+=`SOM → MAU 渗透率: ${r.penetrationRate}%\n`;
-    t+=`MAU（月活）: ${fpr(c.mauPairs)} | ${fp(c.mauPop)}人\n\n`;
+    t+=`SAM（可服务市场）: ${fp(c.samPop)}人 | ${fpr(c.samPairs)}\n`;
+    t+=`SAM → SOM 意愿+触达率: ${r.samToSomRate}%\n`;
+    t+=`SOM（可获得市场）: ${fpr(c.somTotal)}\n`;
+    t+=`  场景结构:\n`;
+    c.segs.forEach(s=>{t+=`    · ${s.name}: ${s.rate}% → ${fpr(s.pairs)}\n`});
+    t+=`\nSOM → MAU 渗透率: ${r.penetrationRate}%\n`;
+    t+=`MAU（月活）: ${fpr(c.mauPairs)} | ${fp(c.mauPop)}人\n`;
     t+=`付费率: ${r.payingRate}%  |  ARPPU: ¥${r.arppu}/月/对\n`;
     t+=`付费对数: ${fpr(c.payPairs)}\n`;
-    t+=`MRR: ${fm(c.mrrW)}/月\n`;
-    t+=`ARR: ${fm(c.arrW)}/年\n\n`;
+    t+=`MRR: ${fm(c.mrrW)}/月  |  ARR: ${fm(c.arrW)}/年\n\n`;
+    t+=`─ 获客经济学 ─\n`;
+    t+=`CPI: ¥${r.cpi}/install  |  Install→MAU: ${r.installToMauRate}%  |  有机占比: ${r.organicRate}%\n`;
+    t+=`LTV: ¥${c.ltv.toFixed(0)}/付费对 (生命周期 ${r.avgLifetimeMonths}个月)\n`;
+    t+=`CAC: ¥${c.cac.toFixed(0)}/付费对\n`;
+    t+=`LTV/CAC: ${c.ltvCac.toFixed(2)}  |  回本期: ${c.payback.toFixed(1)}月\n`;
+    t+=`年买量预算: ${fm(c.adSpendW*12)}/年\n`;
+    t+=`★ 市场得分: ${c.score}/100\n\n`;
   });
   if(state.regions.length>1){
     let tt=0,ts=0,to=0,tm=0,ta=0;
