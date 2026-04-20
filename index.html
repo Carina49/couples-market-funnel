@@ -44,7 +44,9 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 /* ── Funnel ── */
 .funnel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 20px 14px;margin-bottom:20px;box-shadow:var(--shadow)}
 .f-row{display:flex;align-items:center;gap:10px;margin-bottom:3px}
-.f-label{width:40px;font-size:.68rem;font-weight:600;color:var(--text3);text-align:right;flex-shrink:0;letter-spacing:.03em}
+.f-label{width:96px;display:flex;flex-direction:column;align-items:flex-end;gap:1px;color:var(--text3);flex-shrink:0}
+.f-label-en{font-size:.75rem;font-weight:700;letter-spacing:.04em}
+.f-label-cn{font-size:.58rem;font-weight:400;opacity:.85;white-space:nowrap}
 .f-track{flex:1;height:26px;display:flex;justify-content:flex-start}
 .f-bar-wrap{height:100%;border-radius:4px;transition:width .4s cubic-bezier(.16,1,.3,1);min-width:24px;display:flex;overflow:hidden}
 .f-seg{height:100%;transition:width .3s;min-width:0}
@@ -254,7 +256,9 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;hei
   .slider-row{min-width:0}
   .seg-grid{grid-template-columns:1fr}
   .f-val{min-width:80px;font-size:.68rem}
-  .f-label{width:30px;font-size:.6rem}
+  .f-label{width:72px}
+  .f-label-en{font-size:.65rem}
+  .f-label-cn{font-size:.52rem}
   .rev-hero .big{font-size:1.2rem}
 }
 </style>
@@ -798,7 +802,13 @@ function rFunnel(){
   const GLOBAL_REF=15;
   const ref=multi?Math.max(GLOBAL_REF,tTam*1.1):Math.max(tTam*1.15,0.001);
   const layerGrads=['linear-gradient(90deg,#6366f1,#818cf8)','linear-gradient(90deg,#8b5cf6,#a78bfa)','linear-gradient(90deg,#0891b2,#22d3ee)','linear-gradient(90deg,#d97706,#f59e0b)','linear-gradient(90deg,#059669,#34d399)'];
-  const labels=['TAM','SAM','SOM','MAU','营收'];
+  const labels=[
+    {en:'TAM',cn:'总可服务市场'},
+    {en:'SAM',cn:'可服务市场'},
+    {en:'SOM',cn:'可获得市场'},
+    {en:'MAU',cn:'月活用户'},
+    {en:'营收',cn:'年 ARR'}
+  ];
   const pops=[tTam,tSam,tSom*2,tMauPop,tPayP*2];
   const perR=[aggs.map(a=>a.c.tamPop),aggs.map(a=>a.c.samPop),aggs.map(a=>a.c.somTotal*2),aggs.map(a=>a.c.mauPop),aggs.map(a=>a.c.payPairs*2)];
   const vals=[
@@ -824,7 +834,7 @@ function rFunnel(){
   const arppuInp=multi?`¥${effArppu}`:`¥<input class="f-rate-inp f-rate-inp-wide" type="number" min="0" step="1" value="${ar0?.arppu||0}" data-action="arppu" data-uid="arppu_f">`;
   const rates=[
     `↓ ${rateVal(samR,ar0?ar0.tamToSamRate:0,'conv','conv_f',1)} 恋爱/已婚${tagScale}`,
-    `↓ ${rateVal(somR,ar0?(ar0.samToSomRate||0):0,'s2sr','s2sr_f',0.5)} 场景覆盖${tagScale}`,
+    `↓ ${rateVal(somR,ar0?(ar0.samToSomRate||0):0,'s2sr','s2sr_f',0.5)} 应用使用意愿${tagScale}`,
     `↓ ${rateVal(penR,ar0?(ar0.penetrationRate||0):0,'penr','penr_f',0.5)} 渗透${tagScale}`,
     `↓ ${rateVal(payRt,ar0?(ar0.payingRate||0):0,'payr','payr_f',0.5)} 付费 × ${arppuInp}/月${tagEff}`
   ];
@@ -848,7 +858,7 @@ function rFunnel(){
     }else{
       segsH=`<div class="f-seg" style="width:100%;background:${layerGrads[i]}"></div>`;
     }
-    h+=`<div class="f-row"><span class="f-label">${labels[i]}</span><div class="f-track"><div class="f-bar-wrap" style="width:${w.toFixed(1)}%">${segsH}</div></div><span class="f-val">${vals[i]}</span></div>`;
+    h+=`<div class="f-row"><span class="f-label"><span class="f-label-en">${labels[i].en}</span><span class="f-label-cn">${labels[i].cn}</span></span><div class="f-track"><div class="f-bar-wrap" style="width:${w.toFixed(1)}%">${segsH}</div></div><span class="f-val">${vals[i]}</span></div>`;
     if(i<4)h+=`<div class="f-rate">${rates[i]}</div>`;
   }
 
