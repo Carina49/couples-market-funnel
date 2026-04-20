@@ -61,7 +61,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 /* ── 单位经济层（效率层，与规模层区分） ── */
 .f-econ{margin-top:8px;padding:10px 12px;background:var(--bg3);border:1px dashed var(--border2);border-radius:var(--radius-sm);display:flex;align-items:center;gap:12px}
 .f-econ-tag{font-size:.6rem;font-weight:700;letter-spacing:.05em;color:var(--text3);padding:3px 7px;background:var(--bg2);border:1px solid var(--border);border-radius:4px;flex-shrink:0;text-transform:uppercase}
-.f-econ-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;min-width:0}
+.f-econ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;flex:1;min-width:0}
 .f-econ-item{display:flex;flex-direction:column;gap:2px;min-width:0}
 .f-econ-label{font-size:.65rem;color:var(--text3)}
 .f-econ-val{font-size:.88rem;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
@@ -70,8 +70,22 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 .f-econ-val.bad{color:var(--rose)}
 @media(max-width:600px){
   .f-econ{flex-direction:column;align-items:stretch;gap:8px}
-  .f-econ-grid{grid-template-columns:1fr}
+  .f-econ-grid{grid-template-columns:repeat(2,1fr)}
 }
+
+/* ── 漏斗转换率可编辑 input + 规模/效率标签 ── */
+.f-rate-tag{display:inline-block;margin-left:8px;font-size:.55rem;font-weight:700;letter-spacing:.05em;padding:2px 6px;border-radius:3px;text-transform:uppercase;vertical-align:middle}
+.f-rate-tag.scale{background:rgba(99,102,241,.12);color:#6366f1;border:1px solid rgba(99,102,241,.3)}
+.f-rate-tag.eff{background:rgba(16,185,129,.12);color:#059669;border:1px solid rgba(16,185,129,.3)}
+.f-rate-inp{width:52px;padding:1px 4px;border:1px solid var(--border);border-radius:3px;background:transparent;color:inherit;font-weight:700;font-size:.85em;font-variant-numeric:tabular-nums;text-align:right}
+.f-rate-inp:focus{outline:none;border-color:var(--accent,#6366f1);background:rgba(99,102,241,.06)}
+
+/* ── 单位经济层动态提示条 ── */
+.f-econ-hint{margin-top:6px;padding:8px 12px;border-radius:var(--radius-sm);font-size:.72rem;line-height:1.5;border:1px solid}
+.f-econ-hint.bad{background:rgba(225,29,72,.08);border-color:rgba(225,29,72,.3);color:var(--rose)}
+.f-econ-hint.warn{background:rgba(217,119,6,.08);border-color:rgba(217,119,6,.3);color:var(--amber)}
+.f-econ-hint.good{background:rgba(5,150,105,.08);border-color:rgba(5,150,105,.3);color:var(--green)}
+.f-econ-hint.neutral{background:var(--bg2);border-color:var(--border);color:var(--text3)}
 
 /* ── 状态圆点（替代 emoji 徽标） ── */
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:middle;margin-right:6px}
@@ -257,8 +271,8 @@ function defaultChina() {
       {id:'s3',name:'职场新人情侣',rate:35,painPoint:'时间少、压力大',features:'快速互动、减压游戏、周末约会推荐'},
       {id:'s4',name:'其他情侣',rate:15,painPoint:'多样化',features:'通用功能'}
     ],
-    penetrationRate:2, payingRate:4, arppu:40,
-    cpi:15, installToMauRate:30, organicRate:50, avgLifetimeMonths:8,
+    penetrationRate:2, payingRate:5, arppu:40,
+    cpi:10, installToMauRate:30, organicRate:50, avgLifetimeMonths:8,
     tamVars:[
       {id:'v1',name:'人口出生率',trend:'down',detail:'逐年下降，18-35岁存量逐年缩减'},
       {id:'v2',name:'人口年龄结构',trend:'down',detail:'85-02年出生人口从高峰2500万/年降至1600万/年'}
@@ -794,11 +808,18 @@ function rFunnel(){
   const penR=tSom>0?(tMauP/tSom*100).toFixed(1):'0';
   const payRt=tMauP>0?(tPayP/tMauP*100).toFixed(1):'0';
   const effArppu=tPayP>0?(tMrr/(tPayP*10000)).toFixed(0):'0';
+  // Single region: rates become inline-editable inputs bound to the active region.
+  // Multi-region: show aggregated read-only values. Both show scale/efficiency tags.
+  const ar0=multi?null:state.regions.find(rg=>rg.id===state.activeRegionId);
+  const fInp=(act,uid,step,val)=>`<input class="f-rate-inp" type="number" min="0" max="100" step="${step}" value="${val}" data-action="${act}" data-uid="${uid}">`;
+  const rateVal=(fallbackAgg,liveVal,act,uid,step)=>multi?`<b>${fallbackAgg}%</b>`:`${fInp(act,uid,step,liveVal)}%`;
+  const tagScale='<span class="f-rate-tag scale">规模</span>';
+  const tagEff='<span class="f-rate-tag eff">效率</span>';
   const rates=[
-    `↓ <b>${samR}%</b> 恋爱/已婚`,
-    `↓ <b>${somR}%</b> 场景覆盖`,
-    `↓ <b>${penR}%</b> 渗透`,
-    `↓ <b>${payRt}%</b> 付费 × ¥${effArppu}/月`
+    `↓ ${rateVal(samR,ar0?ar0.tamToSamRate:0,'conv','conv_f',1)} 恋爱/已婚${tagScale}`,
+    `↓ ${rateVal(somR,ar0?(ar0.samToSomRate||0):0,'s2sr','s2sr_f',0.5)} 场景覆盖${tagScale}`,
+    `↓ ${rateVal(penR,ar0?(ar0.penetrationRate||0):0,'penr','penr_f',0.5)} 渗透${tagScale}`,
+    `↓ ${rateVal(payRt,ar0?(ar0.payingRate||0):0,'payr','payr_f',0.5)} 付费${tagEff} × ¥${effArppu}/月`
   ];
   const mins=[3,3,3,2,2];
 
@@ -825,13 +846,16 @@ function rFunnel(){
   }
 
   // ── 单位经济层（效率层） ──
-  let tPaid=0,tAdW=0,wLtv=0,wCac=0;
+  let tPaid=0,tAdW=0,wLtv=0,wCac=0,wCpi=0,tPaidInstalls=0;
   aggs.forEach(a=>{
     const pp=a.c.payPairs;
     tPaid+=a.c.paidInstalls;
     tAdW+=a.c.adSpendW;
     wLtv+=(a.c.ltv||0)*pp;
     wCac+=(a.c.cac||0)*pp;
+    const pi=a.c.paidInstalls||0;
+    wCpi+=(a.r.cpi||0)*pi;
+    tPaidInstalls+=pi;
   });
   const aggPay=aggs.reduce((s,a)=>s+a.c.payPairs,0);
   const aggArppu=aggs.reduce((s,a)=>s+(a.r.arppu||0)*a.c.payPairs,0);
@@ -844,14 +868,33 @@ function rFunnel(){
   const pbCls=paybackAgg<=0?'':paybackAgg<=12?'good':paybackAgg<=24?'warn':'bad';
   const cacStr=cacAgg<1?'—':Math.round(cacAgg).toString();
   const pbStr=paybackAgg<1?'—':paybackAgg.toFixed(1);
+  // CPI aggregation: single region uses its cpi directly; multi uses paidInstalls-weighted mean
+  const cpiVal=multi?(tPaidInstalls>0?Math.round(wCpi/tPaidInstalls):0):Math.round(ar0?.cpi||0);
   h+=`<div class="f-econ">
     <span class="f-econ-tag">单位经济</span>
     <div class="f-econ-grid">
-      <div class="f-econ-item"><span class="f-econ-label">CAC</span><span class="f-econ-val ${econCls}">¥${cacStr} / 人</span></div>
+      <div class="f-econ-item"><span class="f-econ-label">CPI 安装成本</span><span class="f-econ-val">¥${cpiVal} / install</span></div>
+      <div class="f-econ-item"><span class="f-econ-label">获付费用户成本</span><span class="f-econ-val ${econCls}">¥${cacStr} / 付费对</span></div>
       <div class="f-econ-item"><span class="f-econ-label">LTV/CAC</span><span class="f-econ-val ${econCls}">${ltvCacAgg.toFixed(2)}</span></div>
       <div class="f-econ-item"><span class="f-econ-label">回本</span><span class="f-econ-val ${pbCls}">${pbStr} 月</span></div>
     </div>
   </div>`;
+  // ── 动态提示条 ──
+  let hintCls,hintTxt;
+  if(aggPay<=0){
+    hintCls='neutral';
+    hintTxt='暂无付费对数据。先确认付费率和 MAU 规模。';
+  } else if(ltvCacAgg<1){
+    hintCls='bad';
+    hintTxt=`当前 LTV/CAC ${ltvCacAgg.toFixed(2)} &lt; 1，亏损状态。优先提升效率杠杆（有机占比/付费率/生命周期），提升规模参数（渗透率/SOM 率）只会放大亏损。`;
+  } else if(ltvCacAgg<3){
+    hintCls='warn';
+    hintTxt=`当前 LTV/CAC ${ltvCacAgg.toFixed(2)}，临界状态。再推效率杠杆到 LTV/CAC ≥ 3 可健康放大规模。`;
+  } else {
+    hintCls='good';
+    hintTxt=`当前 LTV/CAC ${ltvCacAgg.toFixed(2)}，效率健康。可通过提升规模杠杆（渗透率/SOM 率/SAM 率）放大利润。`;
+  }
+  h+=`<div class="f-econ-hint ${hintCls}">${hintTxt}</div>`;
   h+='</div>';
   return h;
 }
@@ -888,7 +931,7 @@ function rLayers(){
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量</span></div>${rVars(r.tamVars,'tamVars')}</div>`;
 
   // TAM→SAM
-  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>转化率</span>
+  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>转化率<span class="f-rate-tag scale">规模</span></span>
     <div class="slider-row"><input type="range" min="1" max="100" value="${r.tamToSamRate}" data-action="convs" data-uid="convs"><input class="inp sm" type="number" min="0" max="100" step="1" value="${r.tamToSamRate}" data-action="conv" data-uid="conv"><span class="unit">%</span></div>
   </div><div class="arrow-line"></div></div>`;
 
@@ -899,7 +942,7 @@ function rLayers(){
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（TAM→SAM）</span></div>${rVars(r.samVars,'samVars')}</div>`;
 
   // SAM→SOM 转化率
-  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>意愿+触达率</span>
+  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>意愿+触达率<span class="f-rate-tag scale">规模</span></span>
     <div class="slider-row"><input type="range" min="0" max="100" value="${r.samToSomRate||0}" data-action="s2srs" data-uid="s2srs"><input class="inp sm" type="number" min="0" max="100" step="0.5" value="${r.samToSomRate||0}" data-action="s2sr" data-uid="s2sr"><span class="unit">%</span></div>
   </div><div class="arrow-line"></div></div>`;
 
@@ -921,7 +964,7 @@ function rLayers(){
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（SAM→SOM）</span></div>${rVars(r.somVars,'somVars')}</div>`;
 
   // SOM→MAU
-  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>市场渗透率</span>
+  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>市场渗透率<span class="f-rate-tag scale">规模</span></span>
     <div class="slider-row"><input type="range" min="0" max="100" value="${r.penetrationRate||0}" data-action="penrs" data-uid="penrs"><input class="inp sm" type="number" min="0" max="100" step="0.5" value="${r.penetrationRate||0}" data-action="penr" data-uid="penr"><span class="unit">%</span></div>
   </div><div class="arrow-line"></div></div>`;
 
@@ -932,7 +975,7 @@ function rLayers(){
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（SOM→MAU）</span></div>${rVars(r.mauVars,'mauVars')}</div>`;
 
   // MAU→Revenue
-  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>付费转化</span>
+  h+=`<div class="arrow"><div class="arrow-line"></div><div class="arrow-body"><span class="arrow-icon">↓</span><span>付费转化<span class="f-rate-tag eff">效率</span></span>
     <div class="slider-row"><input type="range" min="0" max="100" value="${r.payingRate||0}" data-action="payrs" data-uid="payrs"><input class="inp sm" type="number" min="0" max="100" step="0.5" value="${r.payingRate||0}" data-action="payr" data-uid="payr"><span class="unit">%</span></div>
     <span class="lbl" style="margin-left:8px">ARPPU</span>
     <input class="inp sm" type="number" min="0" step="1" value="${r.arppu||0}" data-action="arppu" data-uid="arppu"><span class="unit">元/月/对</span>
@@ -1187,7 +1230,7 @@ function syncSlider(action,sid,val){
   const pairs={convs:'conv',conv:'convs',penrs:'penr',penr:'penrs',payrs:'payr',payr:'payrs',segrs:'segr',segr:'segrs',s2srs:'s2sr',s2sr:'s2srs'};
   const other=pairs[action];if(!other)return;
   const sel=sid?`[data-action="${other}"][data-sid="${sid}"]`:`[data-action="${other}"]`;
-  const el=document.querySelector(sel);if(el)el.value=val;
+  document.querySelectorAll(sel).forEach(el=>{el.value=val});
 }
 
 function onInput(e){
