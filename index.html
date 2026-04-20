@@ -78,6 +78,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 .f-rate-tag.scale{background:rgba(99,102,241,.12);color:#6366f1;border:1px solid rgba(99,102,241,.3)}
 .f-rate-tag.eff{background:rgba(16,185,129,.12);color:#059669;border:1px solid rgba(16,185,129,.3)}
 .f-rate-inp{width:52px;padding:1px 4px;border:1px solid var(--border);border-radius:3px;background:transparent;color:inherit;font-weight:700;font-size:.85em;font-variant-numeric:tabular-nums;text-align:right}
+.f-rate-inp.f-rate-inp-wide{width:64px}
 .f-rate-inp:focus{outline:none;border-color:var(--accent,#6366f1);background:rgba(99,102,241,.06)}
 
 /* ── 单位经济层动态提示条 ── */
@@ -815,11 +816,12 @@ function rFunnel(){
   const rateVal=(fallbackAgg,liveVal,act,uid,step)=>multi?`<b>${fallbackAgg}%</b>`:`${fInp(act,uid,step,liveVal)}%`;
   const tagScale='<span class="f-rate-tag scale">规模</span>';
   const tagEff='<span class="f-rate-tag eff">效率</span>';
+  const arppuInp=multi?`¥${effArppu}`:`¥<input class="f-rate-inp f-rate-inp-wide" type="number" min="0" step="1" value="${ar0?.arppu||0}" data-action="arppu" data-uid="arppu_f">`;
   const rates=[
     `↓ ${rateVal(samR,ar0?ar0.tamToSamRate:0,'conv','conv_f',1)} 恋爱/已婚${tagScale}`,
     `↓ ${rateVal(somR,ar0?(ar0.samToSomRate||0):0,'s2sr','s2sr_f',0.5)} 场景覆盖${tagScale}`,
     `↓ ${rateVal(penR,ar0?(ar0.penetrationRate||0):0,'penr','penr_f',0.5)} 渗透${tagScale}`,
-    `↓ ${rateVal(payRt,ar0?(ar0.payingRate||0):0,'payr','payr_f',0.5)} 付费${tagEff} × ¥${effArppu}/月`
+    `↓ ${rateVal(payRt,ar0?(ar0.payingRate||0):0,'payr','payr_f',0.5)} 付费 × ${arppuInp}/月${tagEff}`
   ];
   const mins=[3,3,3,2,2];
 
