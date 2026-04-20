@@ -58,6 +58,28 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 .f-rate{text-align:center;font-size:.65rem;color:var(--text3);padding:1px 0;line-height:1.2}
 .f-rate b{color:var(--accent);font-weight:600}
 
+/* ── 单位经济层（效率层，与规模层区分） ── */
+.f-econ{margin-top:8px;padding:10px 12px;background:var(--bg3);border:1px dashed var(--border2);border-radius:var(--radius-sm);display:flex;align-items:center;gap:12px}
+.f-econ-tag{font-size:.6rem;font-weight:700;letter-spacing:.05em;color:var(--text3);padding:3px 7px;background:var(--bg2);border:1px solid var(--border);border-radius:4px;flex-shrink:0;text-transform:uppercase}
+.f-econ-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;flex:1;min-width:0}
+.f-econ-item{display:flex;flex-direction:column;gap:2px;min-width:0}
+.f-econ-label{font-size:.65rem;color:var(--text3)}
+.f-econ-val{font-size:.88rem;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+.f-econ-val.good{color:var(--green)}
+.f-econ-val.warn{color:var(--amber)}
+.f-econ-val.bad{color:var(--rose)}
+@media(max-width:600px){
+  .f-econ{flex-direction:column;align-items:stretch;gap:8px}
+  .f-econ-grid{grid-template-columns:1fr}
+}
+
+/* ── 状态圆点（替代 emoji 徽标） ── */
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;vertical-align:middle;margin-right:6px}
+.dot-green{background:#22c55e}
+.dot-blue{background:#3b82f6}
+.dot-yellow{background:#eab308}
+.dot-red{background:#ef4444}
+
 /* ── Card ── */
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:4px;box-shadow:var(--shadow)}
 .card-title{display:flex;align-items:center;gap:8px;margin-bottom:14px}
@@ -281,8 +303,8 @@ function defaultChina() {
 
 // ===== PRESETS =====
 const PRESETS=[
-  {key:'china',label:'🇨🇳 中国',gen:defaultChina},
-  {key:'india',label:'🇮🇳 南亚 / 印度',gen:()=>({
+  {key:'china',label:'中国',gen:defaultChina},
+  {key:'india',label:'南亚 / 印度',gen:()=>({
     id:gid(),name:'南亚 / 印度',
     tam:{population:6.0,description:'18-35岁年轻人口（印度为主，含巴基斯坦、孟加拉等）',source:'UN World Population Prospects 2024'},
     tamToSamRate:40,
@@ -330,7 +352,7 @@ const PRESETS=[
       reasons:['人口红利但 ARR 小','品牌声量弱']
     }
   })},
-  {key:'sea',label:'🇮🇩 东南亚',gen:()=>({
+  {key:'sea',label:'东南亚',gen:()=>({
     id:gid(),name:'东南亚',
     tam:{population:1.75,description:'18-35岁年轻人口（印尼、菲律宾、越南、泰国等）',source:'UN World Population Prospects 2024'},
     tamToSamRate:45,
@@ -373,7 +395,7 @@ const PRESETS=[
       reasons:['ARR 绝对值小','品牌声量低']
     }
   })},
-  {key:'na',label:'🇺🇸 北美',gen:()=>({
+  {key:'na',label:'北美',gen:()=>({
     id:gid(),name:'北美',
     tam:{population:0.87,description:'18-35岁年轻人口（美国+加拿大）',source:'US Census Bureau / Statistics Canada 2024'},
     tamToSamRate:50,
@@ -418,7 +440,7 @@ const PRESETS=[
       reasons:['全球定价标杆','投资人背书','PR 天然入口']
     }
   })},
-  {key:'eu',label:'🇪🇺 欧洲',gen:()=>({
+  {key:'eu',label:'欧洲',gen:()=>({
     id:gid(),name:'欧洲',
     tam:{population:0.95,description:'18-35岁年轻人口（欧盟+英国）',source:'Eurostat Population Statistics 2024'},
     tamToSamRate:50,
@@ -453,14 +475,14 @@ const PRESETS=[
     ],
     feasibility:{
       compliance:5,localization:5,competition:4,channel:2,operation:4,
-      risks:['⚠️ GDPR 合规 $50k+ 起步 + $10k/年维护','DSA 新规要求算法透明','24 语言 ASO','多时区客服']
+      risks:['GDPR 合规 $50k+ 起步 + $10k/年维护','DSA 新规要求算法透明','24 语言 ASO','多时区客服']
     },
     strategicValue:{
       score:3,mode:'defer',
       reasons:['品牌背书中等','建议 Year 2 进入']
     }
   })},
-  {key:'jpkr',label:'🇯🇵 日韩',gen:()=>({
+  {key:'jpkr',label:'日韩',gen:()=>({
     id:gid(),name:'日韩',
     tam:{population:0.32,description:'18-35岁年轻人口（日本+韩国）',source:'Statistics Japan / KOSIS 2024'},
     tamToSamRate:35,
@@ -502,7 +524,7 @@ const PRESETS=[
       reasons:['东亚付费文化标杆','全球 ARPPU 天花板','PR 价值']
     }
   })},
-  {key:'latam',label:'🇧🇷 拉丁美洲',gen:()=>({
+  {key:'latam',label:'拉丁美洲',gen:()=>({
     id:gid(),name:'拉丁美洲',
     tam:{population:1.5,description:'18-35岁年轻人口（巴西、墨西哥、阿根廷、哥伦比亚等）',source:'UN World Population Prospects 2024'},
     tamToSamRate:50,
@@ -544,7 +566,7 @@ const PRESETS=[
       reasons:['ARR 小','品牌价值低']
     }
   })},
-  {key:'blank',label:'➕ 空白区域',gen:null}
+  {key:'blank',label:'空白区域',gen:null}
 ];
 
 // ===== STATE =====
@@ -573,7 +595,7 @@ function migrateState(s){
         india:{compliance:3,localization:5,competition:3,channel:2,operation:3,risks:['22 种官方语言本地化 ROI 低','低 ARPU 支撑不住 CPI','DPDP Act 演进中']},
         sea:{compliance:2,localization:4,competition:3,channel:2,operation:3,risks:['多语言宗教碎片（穆斯林/佛教/天主教）','Line/Grab/GoPay 生态','支付基础设施分化']},
         na:{compliance:3,localization:1,competition:5,channel:2,operation:2,risks:['Tinder/Bumble/Hinge 竞品战壕深','CPI 飙高（$3-8）','订阅疲劳','窗口期 <12 月']},
-        eu:{compliance:5,localization:5,competition:4,channel:2,operation:4,risks:['⚠️ GDPR 合规 $50k+ 起步 + $10k/年维护','DSA 新规要求算法透明','24 语言 ASO','多时区客服']},
+        eu:{compliance:5,localization:5,competition:4,channel:2,operation:4,risks:['GDPR 合规 $50k+ 起步 + $10k/年维护','DSA 新规要求算法透明','24 语言 ASO','多时区客服']},
         jpkr:{compliance:2,localization:4,competition:4,channel:3,operation:3,risks:['LINE/KakaoTalk 生态壁垒','Pairs/Between 本土竞品成熟','需深度日韩文本地化']},
         latam:{compliance:2,localization:3,competition:2,channel:2,operation:3,risks:['WhatsApp 垄断社交','汇率波动 ARPPU 不稳','葡/西两套本地化']}
       };
@@ -707,7 +729,7 @@ const STRATEGY_TIPS={
   na:['订阅周年制 / 关系里程碑 / 情侣共同账户','强化情侣长期关系叙事'],
   jpkr:['LINE 贴纸邀请 / KakaoTalk 双人空间','与 LINE / Kakao 谈深度集成'],
   china:['小红书 KOL 情侣日记 / 七夕话题营销','低预算维持存在感，目标 <¥50万/月 × 10 万 DAU','不求 ROI 求声量，反哺海外版产品'],
-  eu:['⚠️ GDPR 合规 $50k+ 起步 + DSA 算法透明','建议北美站稳后 Year 2 进入'],
+  eu:['GDPR 合规 $50k+ 起步 + DSA 算法透明','建议北美站稳后 Year 2 进入'],
   latam:['WhatsApp 深度集成换低成本获客','ARR 绝对值小，优先级靠后'],
   sea:['ARPPU ¥22 支撑不住 CPI，三管齐下 L/C 1.30','等 ARPPU 翻倍或广告变现模型成熟再议'],
   india:['ARPPU ¥18 + 付费率 3%，三管齐下 L/C 0.98 必亏','进入需"免费+广告"变现赛道']
@@ -720,7 +742,7 @@ function toast(m){const e=document.getElementById('toast');e.textContent=m;e.cla
 function render(){
   const app=document.getElementById('app');
   const fid=document.activeElement?.dataset?.uid;
-  app.innerHTML=rHeader()+rToolbar()+rDecisionBoard()+rStrategyAdvisor()+rFunnel()+rLayers()+rSummary()+rStrategyMatrix()+rSources();
+  app.innerHTML=rHeader()+rToolbar()+rFunnel()+rLayers()+rDecisionBoard()+rStrategyAdvisor()+rStrategyMatrix()+rSummary()+rSources();
   bind();
   if(fid){const el=document.querySelector(`[data-uid="${fid}"]`);if(el){el.focus();const l=el.value?.length;if(l!=null&&el.setSelectionRange)el.setSelectionRange(l,l)}}
   saveState();
@@ -738,7 +760,7 @@ function rToolbar(){
     return `<button class="tab${a}" data-action="sw-region" data-id="${r.id}">${dot}${esc(r.name)}${x}</button>`;
   }).join('');
   return `<div class="toolbar"><div class="region-tabs">${tabs}</div>
-    <div class="dd-wrap"><button class="btn btn-accent" data-action="toggle-presets">+ 添加区域 ▾</button><div class="dd-menu" id="presetMenu">${PRESETS.map(p=>p.key==='blank'?'<div class="dd-sep"></div><div class="dd-item" data-action="add-preset" data-key="blank">➕ 空白区域</div>':'<div class="dd-item" data-action="add-preset" data-key="'+p.key+'">'+p.label+'</div>').join('')}</div></div>
+    <div class="dd-wrap"><button class="btn btn-accent" data-action="toggle-presets">+ 添加区域 ▾</button><div class="dd-menu" id="presetMenu">${PRESETS.map(p=>p.key==='blank'?'<div class="dd-sep"></div><div class="dd-item" data-action="add-preset" data-key="blank">+ 空白区域</div>':'<div class="dd-item" data-action="add-preset" data-key="'+p.key+'">'+p.label+'</div>').join('')}</div></div>
     <button class="btn" data-action="dup-region">复制当前</button>
     <button class="btn" data-action="export">导出摘要</button>
     <button class="btn btn-danger btn-sm" data-action="reset">重置</button></div>`;
@@ -801,6 +823,35 @@ function rFunnel(){
     h+=`<div class="f-row"><span class="f-label">${labels[i]}</span><div class="f-track"><div class="f-bar-wrap" style="width:${w.toFixed(1)}%">${segsH}</div></div><span class="f-val">${vals[i]}</span></div>`;
     if(i<4)h+=`<div class="f-rate">${rates[i]}</div>`;
   }
+
+  // ── 单位经济层（效率层） ──
+  let tPaid=0,tAdW=0,wLtv=0,wCac=0;
+  aggs.forEach(a=>{
+    const pp=a.c.payPairs;
+    tPaid+=a.c.paidInstalls;
+    tAdW+=a.c.adSpendW;
+    wLtv+=(a.c.ltv||0)*pp;
+    wCac+=(a.c.cac||0)*pp;
+  });
+  const aggPay=aggs.reduce((s,a)=>s+a.c.payPairs,0);
+  const aggArppu=aggs.reduce((s,a)=>s+(a.r.arppu||0)*a.c.payPairs,0);
+  const ltvAgg=aggPay>0?wLtv/aggPay:0;
+  const cacAgg=aggPay>0?wCac/aggPay:0;
+  const arppuAgg=aggPay>0?aggArppu/aggPay:0;
+  const ltvCacAgg=cacAgg>0?ltvAgg/cacAgg:0;
+  const paybackAgg=arppuAgg>0?cacAgg/arppuAgg:0;
+  const econCls=aggPay<=0?'':ltvCacAgg>=3?'good':ltvCacAgg>=1?'warn':'bad';
+  const pbCls=paybackAgg<=0?'':paybackAgg<=12?'good':paybackAgg<=24?'warn':'bad';
+  const cacStr=cacAgg<1?'—':Math.round(cacAgg).toString();
+  const pbStr=paybackAgg<1?'—':paybackAgg.toFixed(1);
+  h+=`<div class="f-econ">
+    <span class="f-econ-tag">单位经济</span>
+    <div class="f-econ-grid">
+      <div class="f-econ-item"><span class="f-econ-label">CAC</span><span class="f-econ-val ${econCls}">¥${cacStr} / 人</span></div>
+      <div class="f-econ-item"><span class="f-econ-label">LTV/CAC</span><span class="f-econ-val ${econCls}">${ltvCacAgg.toFixed(2)}</span></div>
+      <div class="f-econ-item"><span class="f-econ-label">回本</span><span class="f-econ-val ${pbCls}">${pbStr} 月</span></div>
+    </div>
+  </div>`;
   h+='</div>';
   return h;
 }
@@ -860,7 +911,7 @@ function rLayers(){
     <div class="seg-grid"><div class="seg-field"><label>核心痛点</label><input type="text" value="${esc(s.painPoint)}" data-action="segpain" data-sid="${s.id}" data-uid="sp_${s.id}"></div><div class="seg-field"><label>机会功能</label><input type="text" value="${esc(s.features)}" data-action="segfeat" data-sid="${s.id}" data-uid="sf_${s.id}"></div></div></div>`
   ).join('');
 
-  const segWarn=Math.abs(segSum-100)>1?`<div style="font-size:.7rem;color:var(--amber);margin-top:4px">⚠ 场景占比总和 ${segSum}%，建议归一化到 100%</div>`:'';
+  const segWarn=Math.abs(segSum-100)>1?`<div style="font-size:.7rem;color:var(--amber);margin-top:4px">场景占比总和 ${segSum}%，建议归一化到 100%</div>`:'';
 
   h+=`<div class="card"><div class="card-title"><span class="badge som">SOM</span><span class="card-name">可获得市场</span></div>
     <div class="cblock"><div class="formula">${esc(r.name)}: SAM × 意愿率 = ${fpr(c.samPairs)} × ${r.samToSomRate||0}% = ${fpr(c.somTotal)}</div></div>
@@ -900,7 +951,7 @@ function rLayers(){
 
   // ── 获客经济学 ──
   const health=c.ltvCac>=3?'green':c.ltvCac>=1?'amber':'rose';
-  const healthTxt=c.ltvCac>=3?'🟢 健康':c.ltvCac>=1?'🟡 临界':'🔴 亏损';
+  const healthTxt=c.ltvCac>=3?'<span class="dot dot-green"></span>健康':c.ltvCac>=1?'<span class="dot dot-yellow"></span>临界':'<span class="dot dot-red"></span>亏损';
   const healthColor=c.ltvCac>=3?'var(--green)':c.ltvCac>=1?'var(--amber)':'var(--rose)';
   const payColor=c.payback<=12?'var(--green)':c.payback<=24?'var(--amber)':'var(--rose)';
   h+=`<div class="card" style="margin-top:12px"><div class="card-title"><span class="badge" style="background:linear-gradient(135deg,#7c3aed,#a78bfa)">CAC</span><span class="card-name">获客经济学 · 市场健康度</span></div>
@@ -911,7 +962,7 @@ function rLayers(){
     <div class="cblock" style="background:rgba(124,58,237,.04);border-color:rgba(124,58,237,.12);margin-top:10px">
       <div class="formula">买量 Install = MAU对 × (1-有机率) / 留存率 = ${fpr(c.mauPairs)} × ${(100-(r.organicRate||0))}% / ${r.installToMauRate||0}% ≈ ${c.paidInstalls<1e4?c.paidInstalls.toFixed(0)+'人':c.paidInstalls<1e8?(c.paidInstalls/1e4).toFixed(1)+'万人':(c.paidInstalls/1e8).toFixed(2)+'亿人'}</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:8px">
-        <div><div class="unit" style="font-size:.7rem">年买量预算</div><div class="computed" style="color:#7c3aed">${fm(c.adSpendW*12)}/年</div></div>
+        <div><div class="unit" style="font-size:.7rem">年买量预算</div><div class="computed" style="color:#7c3aed">${(c.adSpendW*12<=0||classifyRegion(r)==='strategic')?'/':fm(c.adSpendW*12)+'/年'}</div></div>
         <div><div class="unit" style="font-size:.7rem">LTV / 付费对</div><div class="computed" style="color:var(--green)">¥${c.ltv.toFixed(0)}</div></div>
         <div><div class="unit" style="font-size:.7rem">CAC / 付费对</div><div class="computed" style="color:#7c3aed">¥${c.cac<1?'—':c.cac.toFixed(0)}</div></div>
         <div><div class="unit" style="font-size:.7rem">LTV / CAC</div><div class="computed" style="color:${healthColor}">${c.ltvCac.toFixed(2)} ${healthTxt}</div></div>
@@ -935,15 +986,15 @@ function rDecisionBoard(){
   });
   Object.values(buckets).forEach(b=>b.sort((a,z)=>z.os-a.os));
   const cols=[
-    {key:'recommend',icon:'🟢',label:'推荐投',desc:'L/C≥1.0 且回本期可接受',color:'recommend'},
-    {key:'strategic',icon:'🔵',label:'战略保留',desc:'非经济驱动，品牌/声量价值',color:'strategic'},
-    {key:'leverage',icon:'🟡',label:'策略可撬动',desc:'三管齐下后 L/C≥1.5',color:'leverage'},
-    {key:'skip',icon:'🔴',label:'不建议投',desc:'当前参数下难以盈利',color:'skip'}
+    {key:'recommend',dot:'dot-green',label:'推荐投',desc:'L/C≥1.0 且回本期可接受',color:'recommend'},
+    {key:'strategic',dot:'dot-blue',label:'战略保留',desc:'非经济驱动，品牌/声量价值',color:'strategic'},
+    {key:'leverage',dot:'dot-yellow',label:'策略可撬动',desc:'三管齐下后 L/C≥1.5',color:'leverage'},
+    {key:'skip',dot:'dot-red',label:'不建议投',desc:'当前参数下难以盈利',color:'skip'}
   ];
-  let h='<div class="decision-board"><div class="card-title"><span class="card-name">🚦 市场决策信号灯</span></div><div class="db-grid">';
+  let h='<div class="decision-board"><div class="card-title"><span class="card-name">市场决策信号灯</span></div><div class="db-grid">';
   cols.forEach(col=>{
     h+=`<div class="db-col ${col.color}">`;
-    h+=`<div class="db-head">${col.icon} ${col.label}</div>`;
+    h+=`<div class="db-head"><span class="dot ${col.dot}"></span>${col.label}</div>`;
     h+=`<div class="db-desc">${col.desc}</div>`;
     const items=buckets[col.key];
     if(items.length===0){
@@ -970,9 +1021,9 @@ function rStrategyAdvisor(){
   // Top 3: fill from recommend, then strategic
   const top3=[...recommends,...strategics].slice(0,3);
   const medals=['gold','silver','bronze'];
-  const medalIcons=['🥇','🥈','🥉'];
+  const medalIcons=['TOP1','TOP2','TOP3'];
 
-  let h='<div class="card" style="margin-bottom:16px"><div class="card-title"><span class="card-name">🎯 战略地图（按综合价值排序）</span></div>';
+  let h='<div class="card" style="margin-bottom:16px"><div class="card-title"><span class="card-name">战略地图（按综合价值排序）</span></div>';
 
   // Top 3 medals
   top3.forEach(({r,os,cls},idx)=>{
@@ -992,15 +1043,15 @@ function rStrategyAdvisor(){
         <div class="advisor-scores">经济${Math.round(econScore)} / 可行${Math.round(feasScore)} / 战略${Math.round(stratScore)}</div>
         <div class="advisor-play">最佳打法：${esc(comboLabel)}</div>
         <div style="font-size:.72rem;color:var(--text3);margin-bottom:4px">L/C ${c.ltvCac.toFixed(2)} → 撬动后 ${result.ltvCac.toFixed(2)} ｜ ARR ${fm(c.arrW)} → ${fm(result.arrW)}/年</div>
-        ${tips.map(t=>`<div class="advisor-tip">💡 ${esc(t)}</div>`).join('')}
-        ${risks.map(t=>`<div class="advisor-risk">⚠️ ${esc(t)}</div>`).join('')}
+        ${tips.map(t=>`<div class="advisor-tip">${esc(t)}</div>`).join('')}
+        ${risks.map(t=>`<div class="advisor-risk">${esc(t)}</div>`).join('')}
       </div>
     </div>`;
   });
 
   // Strategic hold block
   if(strategics.length>0){
-    h+='<div class="advisor-block strategic-hold"><div class="advisor-block-title">🔵 战略保留区域</div>';
+    h+='<div class="advisor-block strategic-hold"><div class="advisor-block-title"><span class="dot dot-blue"></span>战略保留区域</div>';
     strategics.forEach(({r,os})=>{
       const reasons=(r.strategicValue?.reasons||[]).join('、');
       const tips=(STRATEGY_TIPS[r.id]||[]).slice(0,3);
@@ -1008,8 +1059,8 @@ function rStrategyAdvisor(){
       h+=`<div style="margin-bottom:8px">
         <span style="font-weight:600">${esc(r.name)}</span> <span class="db-score">综合${os}</span>
         <span style="color:var(--text3);font-size:.72rem;margin-left:8px">${esc(reasons)}</span>
-        ${tips.map(t=>`<div class="advisor-tip">💡 ${esc(t)}</div>`).join('')}
-        ${risks.map(t=>`<div class="advisor-risk">⚠️ ${esc(t)}</div>`).join('')}
+        ${tips.map(t=>`<div class="advisor-tip">${esc(t)}</div>`).join('')}
+        ${risks.map(t=>`<div class="advisor-risk">${esc(t)}</div>`).join('')}
       </div>`;
     });
     h+='</div>';
@@ -1017,7 +1068,7 @@ function rStrategyAdvisor(){
 
   // Leverage block
   if(leverages.length>0){
-    h+='<div class="advisor-block leverage-hold"><div class="advisor-block-title">🟡 策略可撬动但需谨慎</div>';
+    h+='<div class="advisor-block leverage-hold"><div class="advisor-block-title"><span class="dot dot-yellow"></span>策略可撬动但需谨慎</div>';
     leverages.forEach(({r,os})=>{
       const {combo,result}=findMinStrategy(r);
       const comboLabel=combo.map(k=>STRATEGY_LABELS[k]||k).join('+');
@@ -1025,7 +1076,7 @@ function rStrategyAdvisor(){
       const isEu=r.id==='eu';
       h+=`<div style="margin-bottom:6px;font-size:.78rem">
         <span style="font-weight:600">${esc(r.name)}</span> · ${esc(comboLabel||'三管齐下')} · 综合${os}
-        ${isEu?`<span class="eu-warn"> ⚠️ ${esc(risk0)}</span>`:(risk0?`<span style="color:var(--text3)"> · ${esc(risk0)}</span>`:'')}
+        ${isEu?`<span class="eu-warn"> · ${esc(risk0)}</span>`:(risk0?`<span style="color:var(--text3)"> · ${esc(risk0)}</span>`:'')}
       </div>`;
     });
     h+='</div>';
@@ -1033,7 +1084,7 @@ function rStrategyAdvisor(){
 
   // Skip block
   if(skips.length>0){
-    h+='<div class="advisor-block skip-hold"><div class="advisor-block-title">🔴 暂不建议投</div>';
+    h+='<div class="advisor-block skip-hold"><div class="advisor-block-title"><span class="dot dot-red"></span>暂不建议投</div>';
     skips.forEach(({r,os})=>{
       const three=simulateStrategy(r,['viral','retention','pricing']);
       h+=`<div style="font-size:.78rem;margin-bottom:4px">
@@ -1045,10 +1096,10 @@ function rStrategyAdvisor(){
 
   // Budget tiers
   h+=`<div class="advisor-budget">
-    <div class="advisor-budget-title">💰 按预算分档的组合建议</div>
-    <div class="advisor-budget-item">🌱 <strong>Seed/A 轮 (&lt;$1M)</strong>：单押北美 + 中国象征性维持（月费 &lt;¥50 万）</div>
-    <div class="advisor-budget-item">🚀 <strong>A+/B 轮 ($1-3M)</strong>：北美 + 日韩 + 中国（经济 + 声量平衡）</div>
-    <div class="advisor-budget-item">🌍 <strong>B+/C 轮 (&gt;$3M)</strong>：加拉美做增量 / 观察欧洲合规窗口（Year 2）</div>
+    <div class="advisor-budget-title">按预算分档的组合建议</div>
+    <div class="advisor-budget-item"><strong>Seed/A 轮 (&lt;$1M)</strong>：单押北美 + 中国象征性维持（月费 &lt;¥50 万）</div>
+    <div class="advisor-budget-item"><strong>A+/B 轮 ($1-3M)</strong>：北美 + 日韩 + 中国（经济 + 声量平衡）</div>
+    <div class="advisor-budget-item"><strong>B+/C 轮 (&gt;$3M)</strong>：加拉美做增量 / 观察欧洲合规窗口（Year 2）</div>
   </div>`;
 
   h+='</div>';
@@ -1069,7 +1120,7 @@ function rStrategyMatrix(){
     if(v>=1.0)return 'matrix-cell-amber';
     return 'matrix-cell-red';
   }
-  let h='<div class="card" style="margin-top:4px"><div class="card-title"><span class="card-name">🔧 策略杠杆对比矩阵</span></div>';
+  let h='<div class="card" style="margin-top:4px"><div class="card-title"><span class="card-name">策略杠杆对比矩阵</span></div>';
   h+='<div style="overflow-x:auto"><table class="matrix-table"><thead><tr>';
   h+='<th>区域</th>';
   strategies.forEach((s,i)=>{
@@ -1101,13 +1152,13 @@ function rSummary(){
     tt+=c.tamPop;ts+=c.samPop;to+=c.somTotal;tm+=c.mauPairs;ta+=c.arrW;
     const healthColor=c.ltvCac>=3?'var(--green)':c.ltvCac>=1?'var(--amber)':'var(--rose)';
     const rk=rank.get(r.id);
-    const rkBadge=rk===1?'🥇':rk===2?'🥈':rk===3?'🥉':`#${rk}`;
+    const rkBadge=rk===1?'TOP1':rk===2?'TOP2':rk===3?'TOP3':`#${rk}`;
     return `<tr><td>${rkBadge} ${esc(r.name)}</td><td class="n">${fpr(c.somTotal)}</td><td class="n">¥${c.cpi}</td><td class="n">¥${c.cac<1?'—':c.cac.toFixed(0)}</td><td class="n">¥${c.ltv.toFixed(0)}</td><td class="n" style="color:${healthColor};font-weight:600">${c.ltvCac.toFixed(2)}</td><td class="n">${c.payback<1?'—':c.payback.toFixed(1)+'月'}</td><td class="n">${fm(c.arrW)}/年</td><td class="n" style="font-weight:700;color:var(--accent)">${c.score}</td></tr>`;
   }).join('');
   return `<div class="card" style="margin-top:16px"><div class="card-title"><span class="card-name">多区域市场健康度对比（按得分排名）</span></div>
     <div style="overflow-x:auto"><table class="stable"><thead><tr><th>区域</th><th class="n">SOM</th><th class="n">CPI</th><th class="n">CAC</th><th class="n">LTV</th><th class="n">LTV/CAC</th><th class="n">回本期</th><th class="n">ARR</th><th class="n">得分</th></tr></thead>
     <tbody>${rowsH}</tbody></table></div>
-    <div style="font-size:.7rem;color:var(--text3);margin-top:8px">LTV/CAC ≥3 🟢 健康 · 1-3 🟡 临界 · &lt;1 🔴 亏损 ｜ 回本期 ≤12月 🟢 · 12-24月 🟡 · &gt;24月 🔴</div></div>`;
+    <div style="font-size:.7rem;color:var(--text3);margin-top:8px">LTV/CAC ≥3 <span class="dot dot-green"></span>健康 · 1-3 <span class="dot dot-yellow"></span>临界 · &lt;1 <span class="dot dot-red"></span>亏损 ｜ 回本期 ≤12月 <span class="dot dot-green"></span> · 12-24月 <span class="dot dot-yellow"></span> · &gt;24月 <span class="dot dot-red"></span></div></div>`;
 }
 
 function rSources(){
@@ -1118,7 +1169,7 @@ function rSources(){
     <li>次月留存：行业平均约会/社交类 25-38%（Adjust 2024）</li>
     <li>付费率基准：探探/Soul 3-5%、Tinder 5-8%、Bumble 8-12%、Pairs/Between 10-15%</li>
     <li>有机占比：情侣产品 K因子天然偏高（双向邀请机制），40-60% 合理</li>
-    <li>⚠ 渗透率、生命周期为产品假设值，需上线后 3-6 个月实际数据校准</li></ul></div>`;
+    <li>渗透率、生命周期为产品假设值，需上线后 3-6 个月实际数据校准</li></ul></div>`;
 }
 
 // ===== EVENTS =====
@@ -1211,8 +1262,8 @@ function doExport(){
     t+=`LTV: ¥${c.ltv.toFixed(0)}/付费对 (生命周期 ${r.avgLifetimeMonths}个月)\n`;
     t+=`CAC: ¥${c.cac.toFixed(0)}/付费对\n`;
     t+=`LTV/CAC: ${c.ltvCac.toFixed(2)}  |  回本期: ${c.payback.toFixed(1)}月\n`;
-    t+=`年买量预算: ${fm(c.adSpendW*12)}/年\n`;
-    t+=`★ 市场得分: ${c.score}/100\n\n`;
+    t+=`年买量预算: ${(c.adSpendW*12<=0||classifyRegion(r)==='strategic')?'/':fm(c.adSpendW*12)+'/年'}\n`;
+    t+=`市场得分: ${c.score}/100\n\n`;
   });
   if(state.regions.length>1){
     let tt=0,ts=0,to=0,tm=0,ta=0;
