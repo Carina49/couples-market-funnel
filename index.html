@@ -68,6 +68,10 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,
 .f-econ-val.good{color:var(--green)}
 .f-econ-val.warn{color:var(--amber)}
 .f-econ-val.bad{color:var(--rose)}
+.f-econ-sub{font-size:.62rem;line-height:1.3;margin-top:2px}
+.f-econ-sub.good{color:var(--green)}
+.f-econ-sub.warn{color:var(--amber)}
+.f-econ-sub.bad{color:var(--rose)}
 @media(max-width:600px){
   .f-econ{flex-direction:column;align-items:stretch;gap:8px}
   .f-econ-grid{grid-template-columns:repeat(2,1fr)}
@@ -848,13 +852,14 @@ function rFunnel(){
   }
 
   // ── 单位经济层（效率层） ──
-  let tPaid=0,tAdW=0,wLtv=0,wCac=0,wCpi=0,tPaidInstalls=0;
+  let tPaid=0,tAdW=0,wLtv=0,wCac=0,wCpi=0,tPaidInstalls=0,wLt=0;
   aggs.forEach(a=>{
     const pp=a.c.payPairs;
     tPaid+=a.c.paidInstalls;
     tAdW+=a.c.adSpendW;
     wLtv+=(a.c.ltv||0)*pp;
     wCac+=(a.c.cac||0)*pp;
+    wLt+=(a.r.avgLifetimeMonths||0)*pp;
     const pi=a.c.paidInstalls||0;
     wCpi+=(a.r.cpi||0)*pi;
     tPaidInstalls+=pi;
@@ -866,10 +871,18 @@ function rFunnel(){
   const arppuAgg=aggPay>0?aggArppu/aggPay:0;
   const ltvCacAgg=cacAgg>0?ltvAgg/cacAgg:0;
   const paybackAgg=arppuAgg>0?cacAgg/arppuAgg:0;
+  const ltAgg=aggPay>0?wLt/aggPay:0;
   const econCls=aggPay<=0?'':ltvCacAgg>=3?'good':ltvCacAgg>=1?'warn':'bad';
   const pbCls=paybackAgg<=0?'':paybackAgg<=12?'good':paybackAgg<=24?'warn':'bad';
   const cacStr=cacAgg<1?'—':Math.round(cacAgg).toString();
   const pbStr=paybackAgg<1?'—':paybackAgg.toFixed(1);
+  let pbSubCls='',pbSubTxt='';
+  if(aggPay>0&&ltAgg>0&&paybackAgg>0){
+    const ltStr=ltAgg.toFixed(1);
+    if(paybackAgg<ltAgg*0.5){pbSubCls='good';pbSubTxt=`&lt; 生命周期 ${ltStr}月的一半，健康`;}
+    else if(paybackAgg<ltAgg){pbSubCls='warn';pbSubTxt=`接近生命周期 ${ltStr}月，临界`;}
+    else{pbSubCls='bad';pbSubTxt=`&gt; 生命周期 ${ltStr}月，用户还没回本就流失`;}
+  }
   // CPI aggregation: single region uses its cpi directly; multi uses paidInstalls-weighted mean
   const cpiVal=multi?(tPaidInstalls>0?Math.round(wCpi/tPaidInstalls):0):Math.round(ar0?.cpi||0);
   h+=`<div class="f-econ">
@@ -878,7 +891,7 @@ function rFunnel(){
       <div class="f-econ-item"><span class="f-econ-label">CPI 安装成本</span><span class="f-econ-val">¥${cpiVal} / install</span></div>
       <div class="f-econ-item"><span class="f-econ-label">获付费用户成本</span><span class="f-econ-val ${econCls}">¥${cacStr} / 付费对</span></div>
       <div class="f-econ-item"><span class="f-econ-label">LTV/CAC</span><span class="f-econ-val ${econCls}">${ltvCacAgg.toFixed(2)}</span></div>
-      <div class="f-econ-item"><span class="f-econ-label">回本</span><span class="f-econ-val ${pbCls}">${pbStr} 月</span></div>
+      <div class="f-econ-item"><span class="f-econ-label">付费对回本期</span><span class="f-econ-val ${pbCls}">${pbStr} 月</span>${pbSubTxt?`<span class="f-econ-sub ${pbSubCls}">${pbSubTxt}</span>`:''}</div>
     </div>
   </div>`;
   // ── 动态提示条 ──
