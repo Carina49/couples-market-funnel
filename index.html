@@ -261,6 +261,122 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;hei
   .f-label-cn{font-size:.52rem}
   .rev-hero .big{font-size:1.2rem}
 }
+
+/* ===== Global Panel ===== */
+.global-panel{background:linear-gradient(135deg,rgba(99,102,241,.04),rgba(236,72,153,.04));border:1px solid rgba(99,102,241,.18);border-radius:12px;padding:14px 16px;margin:10px 0 14px}
+.gp-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.gp-head .gp-title{font-weight:700;font-size:.95rem;color:var(--text)}
+.gp-head .gp-sub{font-size:.7rem;color:var(--text3);margin-left:auto}
+.gp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:900px){.gp-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.gp-grid{grid-template-columns:1fr}}
+.gp-col{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.gp-col-title{font-size:.72rem;font-weight:700;color:#6366f1;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.gp-col-title::before{content:'';width:3px;height:12px;background:#6366f1;border-radius:2px}
+.gp-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:.78rem;gap:8px}
+.gp-row label{color:var(--text3);font-size:.72rem;flex:1;min-width:0}
+.gp-row .gp-val{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.gp-row input[type="number"]{width:70px;padding:3px 6px;font-size:.75rem;text-align:right;border:1px solid var(--border);border-radius:4px;background:#fafafa;font-weight:600}
+.gp-row input[type="number"]:read-only{background:rgba(99,102,241,.06);color:var(--text3);cursor:not-allowed}
+.gp-row .unit{font-size:.68rem;color:var(--text3)}
+.model-select{width:100%;padding:6px 8px;font-size:.78rem;font-weight:600;border:1px solid var(--border);border-radius:6px;background:#fafafa;color:var(--text);outline:none;cursor:pointer;margin-bottom:6px}
+.model-select:focus{border-color:#6366f1}
+.model-meta{background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.1);border-radius:5px;padding:6px 8px;font-size:.68rem;color:var(--text3);line-height:1.5;display:flex;flex-direction:column;gap:2px}
+.model-meta strong{color:#6366f1;font-weight:700}
+
+/* ===== 分层留存与 Cohort LTV ===== */
+.retention-card{background:linear-gradient(135deg,rgba(245,158,11,.04),rgba(236,72,153,.04));border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:14px 16px;margin-top:12px}
+.ret-head{font-size:.72rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ret-head::before{content:'';width:3px;height:12px;background:#d97706;border-radius:2px}
+.ret-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:600px){.ret-grid{grid-template-columns:1fr}}
+.ret-col{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.ret-col-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:6px;border-bottom:1px dashed var(--border)}
+.ret-col-title{font-size:.78rem;font-weight:700}
+.ret-col-title.free{color:#64748b}
+.ret-col-title.paid{color:#10b981}
+.ret-col-badge{font-size:.68rem;color:var(--text3);padding:2px 8px;background:rgba(0,0,0,.03);border-radius:10px}
+.ret-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:.75rem}
+.ret-row label{color:var(--text3);font-size:.72rem}
+.ret-row input[type="number"]{width:60px;padding:3px 6px;font-size:.72rem;text-align:right;border:1px solid var(--border);border-radius:4px;background:#fafafa;font-weight:600}
+.ret-row .unit{font-size:.65rem;color:var(--text3);margin-left:2px}
+.ret-summary{margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.75rem}
+.ret-summary strong{color:#d97706}
+.ret-dual{background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.15);border-radius:6px;padding:8px 12px;margin-top:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:center}
+.ret-dual label{font-size:.7rem;color:var(--text3)}
+.ret-dual input[type="number"]{width:60px;padding:3px 6px;font-size:.72rem;text-align:right;border:1px solid var(--border);border-radius:4px;background:#fafafa;font-weight:600}
+.ret-cohort{margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.ret-cohort-cell{background:#fff;border:1px solid var(--border);border-radius:6px;padding:8px 10px;text-align:center}
+.ret-cohort-cell .rc-label{font-size:.63rem;color:var(--text3)}
+.ret-cohort-cell .rc-value{font-size:.95rem;font-weight:700;margin-top:2px}
+
+/* ===== 单位经济学（每区域扩展块） ===== */
+.unit-econ{background:linear-gradient(135deg,rgba(16,185,129,.04),rgba(99,102,241,.04));border:1px solid rgba(16,185,129,.2);border-radius:10px;padding:12px 14px;margin-top:12px}
+.ue-head{font-size:.72rem;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ue-head::before{content:'';width:3px;height:12px;background:#10b981;border-radius:2px}
+.ue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:6px}
+.ue-cell{background:#fff;border:1px solid var(--border);border-radius:6px;padding:8px 10px}
+.ue-cell .ue-label{font-size:.65rem;color:var(--text3);margin-bottom:2px}
+.ue-cell .ue-value{font-size:1rem;font-weight:700;color:var(--text)}
+.ue-cell .ue-value.good{color:#10b981}
+.ue-cell .ue-value.warn{color:var(--amber)}
+.ue-cell .ue-value.bad{color:var(--rose)}
+.ue-formula{font-size:.68rem;color:var(--text3);font-family:ui-monospace,monospace;margin-top:6px;padding:6px 8px;background:rgba(0,0,0,.02);border-radius:4px;line-height:1.6}
+
+/* ===== 12 月预测 ===== */
+.forecast-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:12px}
+.fc-head{font-size:.78rem;font-weight:700;color:#6366f1;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.fc-head::before{content:'';width:3px;height:12px;background:#6366f1;border-radius:2px}
+.fc-growth{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--text3);font-weight:500;text-transform:none;letter-spacing:0}
+.fc-growth input{width:60px;padding:3px 6px;font-size:.72rem;text-align:right;border:1px solid var(--border);border-radius:4px;background:#fafafa;font-weight:600}
+.fc-bar{display:flex;align-items:flex-end;gap:6px;height:120px;margin:10px 0 4px;padding-top:8px}
+.fc-bar-group{flex:1;display:flex;flex-direction:column;align-items:center;height:100%;min-width:0}
+.fc-bar-pair{display:flex;gap:2px;align-items:flex-end;height:100%;width:100%}
+.fc-bar-item{flex:1;display:flex;align-items:flex-end;height:100%}
+.fc-bar-inner{width:100%;border-radius:3px 3px 0 0;transition:height .3s ease;min-height:1px}
+.fc-bar-inner.rev{background:#10b981}
+.fc-bar-inner.cost{background:#ef4444;opacity:.6}
+.fc-bar-label{font-size:.62rem;color:var(--text3);margin-top:4px;white-space:nowrap}
+.fc-legend{display:flex;gap:14px;justify-content:center;font-size:.68rem;color:var(--text3);margin-bottom:8px}
+.fc-legend span::before{content:'';display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.fc-legend .l-rev::before{background:#10b981}
+.fc-legend .l-cost::before{background:#ef4444;opacity:.6}
+.fc-table{width:100%;border-collapse:collapse;font-size:.7rem;margin-top:8px;font-variant-numeric:tabular-nums}
+.fc-table th{text-align:left;font-size:.62rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;padding:6px 4px;border-bottom:1px solid var(--border)}
+.fc-table td{padding:5px 4px;border-bottom:1px dashed rgba(0,0,0,.04)}
+.fc-table tr.flip td{background:rgba(16,185,129,.06);font-weight:600}
+
+/* ===== Cohort 曲线图 ===== */
+.cohort-chart{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:12px}
+.cc-head{font-size:.78rem;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cc-head::before{content:'';width:3px;height:12px;background:#d97706;border-radius:2px}
+.cc-legend{display:flex;gap:14px;font-size:.68rem;color:var(--text3);margin-bottom:6px}
+.cc-legend span::before{content:'';display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.cc-legend .l-free::before{background:#64748b}
+.cc-legend .l-paid::before{background:#10b981}
+
+/* ===== 成本饼图 ===== */
+.cost-pie{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:12px;display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:center}
+@media (max-width:600px){.cost-pie{grid-template-columns:1fr}}
+.cp-head{grid-column:1/-1;font-size:.78rem;font-weight:700;color:#ec4899;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.cp-head::before{content:'';width:3px;height:12px;background:#ec4899;border-radius:2px}
+.cp-legend-row{display:flex;justify-content:space-between;align-items:center;font-size:.72rem;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,.05)}
+.cp-legend-row:last-child{border-bottom:none}
+.cp-legend-row .cp-dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.cp-legend-row .cp-pct{color:var(--text3);font-size:.65rem;margin-left:8px}
+
+/* ===== 二维敏感性热力图 ===== */
+.heatmap-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:12px}
+.hm-head{font-size:.78rem;font-weight:700;color:#3b82f6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.hm-head::before{content:'';width:3px;height:12px;background:#3b82f6;border-radius:2px}
+.hm-sub{font-size:.68rem;color:var(--text3);margin-bottom:8px;line-height:1.5}
+.hm-grid{display:inline-grid;grid-template-columns:auto repeat(8,1fr);gap:2px;width:100%;font-size:.65rem}
+.hm-corner,.hm-col-head,.hm-row-head{background:rgba(0,0,0,.03);padding:4px 6px;text-align:center;font-weight:600;color:var(--text3)}
+.hm-cell{padding:8px 4px;text-align:center;border-radius:3px;font-weight:700;font-size:.7rem;color:#fff;position:relative;cursor:default}
+.hm-cell.current{outline:2px solid #1d1d1f;outline-offset:-2px;z-index:1}
+.hm-legend{display:flex;gap:8px;margin-top:8px;font-size:.62rem;color:var(--text3);flex-wrap:wrap}
+.hm-legend-item{display:flex;align-items:center;gap:4px}
+.hm-legend-dot{display:inline-block;width:12px;height:12px;border-radius:2px}
 </style>
 </head>
 <body>
@@ -282,6 +398,10 @@ function defaultChina() {
     ],
     penetrationRate:2, payingRate:5, arppu:40,
     cpi:10, installToMauRate:30, organicRate:50, avgLifetimeMonths:8,
+    // 分层留存（%）：D1/D7/D30，免费 vs 付费分开
+    d1Free:40, d7Free:25, d30Free:15,
+    d1Paid:60, d7Paid:45, d30Paid:35,
+    dualActiveRate:70, dualActiveBoost:1.3, // 双人活跃率% + 留存加成系数
     tamVars:[
       {id:'v1',name:'人口出生率',trend:'down',detail:'逐年下降，18-35岁存量逐年缩减'},
       {id:'v2',name:'人口年龄结构',trend:'down',detail:'85-02年出生人口从高峰2500万/年降至1600万/年'}
@@ -593,15 +713,64 @@ const PRESETS=[
   {key:'blank',label:'空白区域',gen:null}
 ];
 
+// ===== MODEL PRICES (¥/M tokens) =====
+const MODEL_PRICES={
+  'claude-opus-4-6':    {input:108,  output:540,  label:'Claude Opus 4.6',     tier:'旗舰',       region:'us'},
+  'claude-sonnet-4-6':  {input:21.6, output:108,  label:'Claude Sonnet 4.6',   tier:'高端',       region:'us'},
+  'claude-haiku-4-5':   {input:7.2,  output:36,   label:'Claude Haiku 4.5',    tier:'中端',       region:'us'},
+  'gpt-4o':             {input:18,   output:72,   label:'GPT-4o',              tier:'高端',       region:'us'},
+  'gpt-4o-mini':        {input:1.08, output:4.32, label:'GPT-4o mini',         tier:'轻量',       region:'us'},
+  'gemini-2-5-pro':     {input:9,    output:72,   label:'Gemini 2.5 Pro',      tier:'高端',       region:'us'},
+  'gemini-2-5-flash':   {input:1.08, output:4.32, label:'Gemini 2.5 Flash',    tier:'轻量',       region:'us'},
+  'deepseek-v3':        {input:2,    output:8,    label:'DeepSeek-V3',         tier:'性价比',     region:'cn'},
+  'doubao-pro-32k':     {input:0.8,  output:2,    label:'豆包 Pro 32K',        tier:'极致性价比', region:'cn'},
+  'qwen-max':           {input:10,   output:30,   label:'通义千问 Max',        tier:'高端',       region:'cn'},
+  'qwen-plus':          {input:1.2,  output:3,    label:'通义千问 Plus',       tier:'性价比',     region:'cn'},
+  'kimi-k1-5':          {input:1.2,  output:12,   label:'Kimi k1.5',           tier:'长文本',     region:'cn'},
+  'glm-4-plus':         {input:5,    output:5,    label:'智谱 GLM-4 Plus',     tier:'均衡',       region:'cn'},
+  'ernie-4-turbo':      {input:30,   output:60,   label:'文心 ERNIE 4.0 Turbo',tier:'高端',       region:'cn'},
+  'custom':             {input:null, output:null, label:'自定义单价',          tier:'手动',       region:'custom'}
+};
+const BASELINE_BLENDED=7.2*0.4+36*0.6; // Haiku 基准
+function relCostIndex(m){if(!m||m.input==null)return null;return (m.input*0.4+m.output*0.6)/BASELINE_BLENDED}
+
 // ===== STATE =====
 let uid=1000; const gid=()=>'id_'+(uid++);
-const SV=4;
-let state=loadState()||{v:SV,regions:[defaultChina()],activeRegionId:'china'};
+const SV=5;
+
+// ===== 全局默认配置 =====
+function defaultGlobal(){
+  return {
+    // 模型选型
+    model:'claude-haiku-4-5',
+    inputPrice:7.2, outputPrice:36, // ¥/M tokens
+    // Token 参数
+    msgPerDay:50, tokensPerMsg:100,
+    inputRatio:40, cacheHitRate:30, contextMultiplier:2.5,
+    // 服务器 / 带宽 per user（元/月）
+    serverPerUser:1.0, bandwidthPerUser:0.5,
+    // 团队 & 固定成本（全局，万元/月）
+    teamSize:3, avgSalaryW:1.5, // 每人月薪（万元）
+    serverBaseW:0.35, otherCostW:0.2,
+    // 应用商店抽成 & 订阅占比
+    commissionRate:30, // %（仅对订阅部分扣）
+    subRatio:70,       // % ARPPU 中来自订阅的比例（剩余是装扮+抽佣，不扣应用商店）
+    // 增长预测
+    growthRate:40,     // % 月增长率（用于 12 月预测）
+  };
+}
+
+let state=loadState()||{v:SV,global:defaultGlobal(),regions:[defaultChina()],activeRegionId:'china'};
 migrateState(state);
 
 function loadState(){try{const s=localStorage.getItem('cmc4');if(!s)return null;const d=JSON.parse(s);if(d.v!==SV)return null;return d}catch{return null}}
 function saveState(){try{localStorage.setItem('cmc4',JSON.stringify(state))}catch{}}
 function migrateState(s){
+  if(!s.global) s.global=defaultGlobal();
+  else {
+    const d=defaultGlobal();
+    Object.keys(d).forEach(k=>{if(s.global[k]==null) s.global[k]=d[k]});
+  }
   s.regions.forEach(r=>{
     if(r.penetrationRate==null)r.penetrationRate=2;
     if(r.payingRate==null)r.payingRate=4;
@@ -611,6 +780,15 @@ function migrateState(s){
     if(r.installToMauRate==null)r.installToMauRate=30;
     if(r.organicRate==null)r.organicRate=50;
     if(r.avgLifetimeMonths==null)r.avgLifetimeMonths=8;
+    // 分层留存默认值（新区域或老数据兜底）
+    if(r.d1Free==null)r.d1Free=40;
+    if(r.d7Free==null)r.d7Free=25;
+    if(r.d30Free==null)r.d30Free=15;
+    if(r.d1Paid==null)r.d1Paid=60;
+    if(r.d7Paid==null)r.d7Paid=45;
+    if(r.d30Paid==null)r.d30Paid=35;
+    if(r.dualActiveRate==null)r.dualActiveRate=70;
+    if(r.dualActiveBoost==null)r.dualActiveBoost=1.3;
     if(!r.mauVars)r.mauVars=[];
     if(!r.revVars)r.revVars=[];
     if(!r.feasibility){
@@ -657,9 +835,11 @@ function fpr(yiPairs){
   return '0对';
 }
 function fm(wan){
-  if(wan>=10000)return(wan/10000).toFixed(2).replace(/\.?0+$/,'')+'亿元';
-  if(wan>=1)return wan.toFixed(1).replace(/\.?0+$/,'')+'万元';
-  if(wan>0)return(wan*10000).toFixed(0)+'元';
+  if(wan==null||isNaN(wan))return '—';
+  const neg=wan<0;const a=Math.abs(wan);const sign=neg?'-':'';
+  if(a>=10000)return sign+(a/10000).toFixed(2).replace(/\.?0+$/,'')+'亿元';
+  if(a>=1)return sign+a.toFixed(1).replace(/\.?0+$/,'')+'万元';
+  if(a>0)return sign+(a*10000).toFixed(0)+'元';
   return '0元';
 }
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -688,13 +868,68 @@ function calc(r){
   const cac=payPairs>0?adSpendW*10000/payPairs:0;
   const ltvCac=cac>0?ltv/cac:0;
   const payback=(r.arppu||0)>0?cac/(r.arppu||0):0;
+
+  // ===== Token 成本 / 抽成 / 净贡献 =====
+  const g=state.global||defaultGlobal();
+  const baseTokens=(g.msgPerDay||50)*(g.tokensPerMsg||100)*30;
+  const totalTokens=baseTokens*(g.contextMultiplier||1);
+  const inT=totalTokens*((g.inputRatio||40)/100);
+  const outT=totalTokens*(1-(g.inputRatio||40)/100);
+  const cacheEff=(g.cacheHitRate||0)/100*0.1+(1-(g.cacheHitRate||0)/100);
+  // Token 成本（元/月/MAU）
+  const tokenCostPerUser=(inT*(g.inputPrice||0)*cacheEff+outT*(g.outputPrice||0))/1000000;
+  const varCostPerUser=tokenCostPerUser+(g.serverPerUser||0)+(g.bandwidthPerUser||0);
+  // 可变成本总计（万元/月）：mauPop 亿人 × 1e4 × varCostPerUser 元
+  const varCostTotalW=mauPop*1e4*varCostPerUser;
+  // 应用商店抽成：仅对订阅部分
+  const subRatio=(g.subRatio||0)/100;
+  const commRate=(g.commissionRate||0)/100;
+  const commissionLossW=mrrW*subRatio*commRate;
+  const mrrNetW=mrrW-commissionLossW;
+  const arrNetW=mrrNetW*12;
+  // 净贡献 = 净 MRR - 可变成本（不含固定成本）
+  const netContribW=mrrNetW-varCostTotalW;
+  // 贡献利润 per MAU（元/月）
+  const netRevPerMau=(r.arppu||0)*(r.payingRate||0)/100*(1-subRatio*commRate);
+  const contributionPerMau=netRevPerMau-varCostPerUser;
+  // 付费对的净 ARPPU（扣抽成后）
+  const paidArpu=(r.arppu||0)*(1-subRatio*commRate);
+  // 每个付费对分摊的可变成本（因为 Token 按 MAU 算，付费对要背全部 MAU 的成本）
+  const payingR=(r.payingRate||0)/100;
+  const paidVarCost=payingR>0?varCostPerUser/payingR:0;
+  const paidContribution=paidArpu-paidVarCost;
+
+  // ===== 分层留存 + Cohort LTV =====
+  const d30Free=(r.d30Free||0)/100;
+  const d30Paid=(r.d30Paid||0)/100;
+  const monthlyRetFree=Math.max(0,Math.min(0.99,d30Free));
+  const monthlyRetPaid=Math.max(0,Math.min(0.99,d30Paid));
+  const lifetimeFree=monthlyRetFree>=1?Infinity:1/(1-monthlyRetFree);
+  const lifetimePaidBase=monthlyRetPaid>=1?Infinity:1/(1-monthlyRetPaid);
+  // 双人活跃加成：effective = base × (1 + rate × (boost - 1))
+  const dRate=(r.dualActiveRate||0)/100;
+  const dBoost=r.dualActiveBoost||1;
+  const dualFactor=1+dRate*(dBoost-1);
+  const lifetimePaid=lifetimePaidBase*dualFactor;
+  // Cohort LTV（元/付费对，用真实生命周期）
+  const cohortLtvPaid=paidContribution*lifetimePaid;
+  const cohortLtvCacNet=cac>0?cohortLtvPaid/cac:0;
+  // 旧字段别名保留兼容
+  const ltvNetPair=cohortLtvPaid;
+  const ltvCacNetFinal=cohortLtvCacNet;
+
   // 市场得分：LTV/CAC 50% + 回本期 25% + SOM 规模 15% + ARR 10%
   const s1=Math.min(100,(ltvCac/3)*100);
   const s2=payback>0?Math.max(0,100-payback*6):0;
   const s3=Math.min(100,somTotal/0.2*100);
   const s4=Math.min(100,arrW/5000*100);
   const score=Math.round(s1*0.5+s2*0.25+s3*0.15+s4*0.1);
-  return{tamPop,samPop,samPairs,segs,somTotal,somRate,mauPairs,mauPop,payPairs,mrrW,arrW,cpi,paidInstalls,adSpendW,ltv,cac,ltvCac,payback,score};
+  return{tamPop,samPop,samPairs,segs,somTotal,somRate,mauPairs,mauPop,payPairs,mrrW,arrW,cpi,paidInstalls,adSpendW,ltv,cac,ltvCac,payback,score,
+    // 单位经济字段
+    tokenCostPerUser,varCostPerUser,varCostTotalW,commissionLossW,mrrNetW,arrNetW,netContribW,
+    netRevPerMau,contributionPerMau,paidContribution,ltvNetPair,ltvCacNetFinal,
+    // 分层留存 + Cohort LTV
+    monthlyRetFree,monthlyRetPaid,lifetimeFree,lifetimePaidBase,lifetimePaid,dualFactor,cohortLtvPaid,cohortLtvCacNet};
 }
 // ===== STRATEGY UTILS =====
 function calcFeasibility(r){
@@ -762,18 +997,118 @@ const STRATEGY_TIPS={
 function ar(){return state.regions.find(r=>r.id===state.activeRegionId)||state.regions[0]}
 function toast(m){const e=document.getElementById('toast');e.textContent=m;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
 
+// Debounced render：用户连续输入时不重建整页 DOM，停顿后才更新衍生字段
+let _renderTimer=null;
+function scheduleRender(){
+  if(_renderTimer)clearTimeout(_renderTimer);
+  _renderTimer=setTimeout(()=>{_renderTimer=null;render();},150);
+}
+
 // ===== RENDER =====
 function render(){
   const app=document.getElementById('app');
-  const fid=document.activeElement?.dataset?.uid;
-  app.innerHTML=rHeader()+rToolbar()+rFunnel()+rLayers()+rDecisionBoard()+rStrategyAdvisor()+rStrategyMatrix()+rSummary()+rSources();
+  // 记住当前焦点（支持 data-uid 和 data-action 两种 key）、光标位置
+  const active=document.activeElement;
+  const fid=active?.dataset?.uid;
+  const fact=active?.dataset?.action;
+  const fsid=active?.dataset?.sid;
+  let selStart=null,selEnd=null;
+  try{selStart=active?.selectionStart;selEnd=active?.selectionEnd}catch(e){}
+  app.innerHTML=rHeader()+rToolbar()+rFunnel()+rGlobalPanel()+rLayers()+rDecisionBoard()+rStrategyAdvisor()+rStrategyMatrix()+rSummary()+rSources();
   bind();
-  if(fid){const el=document.querySelector(`[data-uid="${fid}"]`);if(el){el.focus();const l=el.value?.length;if(l!=null&&el.setSelectionRange)el.setSelectionRange(l,l)}}
+  // 焦点恢复：优先 data-uid，fallback 到 data-action（可能带 data-sid 区分）
+  let el=null;
+  if(fid) el=document.querySelector(`[data-uid="${fid}"]`);
+  if(!el&&fact){
+    const sel=fsid?`[data-action="${fact}"][data-sid="${fsid}"]`:`[data-action="${fact}"]`;
+    el=document.querySelector(sel);
+  }
+  if(el){
+    el.focus();
+    if(selStart!=null&&el.setSelectionRange){
+      try{el.setSelectionRange(selStart,selEnd)}catch(e){}
+    }
+  }
   saveState();
 }
 
 function rHeader(){
   return `<div class="header"><h1>情侣市场 TAM / SAM / SOM / MAU / 营收 计算模型</h1><p>可编辑参数 · 支持多区域 · 实时联动计算</p></div>`;
+}
+
+function rGlobalPanel(){
+  const g=state.global||defaultGlobal();
+  const m=MODEL_PRICES[g.model]||MODEL_PRICES['custom'];
+  const relCost=relCostIndex(m);
+  const isCustom=g.model==='custom';
+  const teamTotalW=(g.teamSize||0)*(g.avgSalaryW||0);
+  const fixedTotalW=teamTotalW+(g.serverBaseW||0)+(g.otherCostW||0);
+
+  // 模型下拉
+  const modelOpts=(()=>{
+    const groups={'Anthropic（Claude）':['claude-opus-4-6','claude-sonnet-4-6','claude-haiku-4-5'],'OpenAI':['gpt-4o','gpt-4o-mini'],'Google':['gemini-2-5-pro','gemini-2-5-flash'],'国产模型':['deepseek-v3','doubao-pro-32k','qwen-max','qwen-plus','kimi-k1-5','glm-4-plus','ernie-4-turbo'],'自定义':['custom']};
+    return Object.entries(groups).map(([gn,keys])=>
+      `<optgroup label="${gn}">${keys.map(k=>{const mm=MODEL_PRICES[k];const sel=k===g.model?' selected':'';return `<option value="${k}"${sel}>${mm.label}${k!=='custom'?` · ¥${mm.input}/${mm.output}`:''}</option>`}).join('')}</optgroup>`
+    ).join('');
+  })();
+
+  return `<div class="global-panel">
+    <div class="gp-head">
+      <span class="gp-title">🌐 全局参数</span>
+      <span class="gp-sub">模型选型 · Token 成本 · 团队成本 · 应用商店抽成 · 订阅占比</span>
+    </div>
+    <div class="gp-grid">
+
+      <!-- 模型选型 -->
+      <div class="gp-col">
+        <div class="gp-col-title">模型选型</div>
+        <select class="model-select" data-action="g-model">${modelOpts}</select>
+        <div class="model-meta">
+          <span>档位：<strong>${m.tier}${m.region==='cn'?'（国产）':m.region==='us'?'（国外）':''}</strong></span>
+          <span>输出/输入比：<strong>${m.input?(m.output/m.input).toFixed(1)+'×':'—'}</strong></span>
+          <span>相对 Haiku：<strong>${relCost?relCost.toFixed(2)+'×':'—'}</strong></span>
+        </div>
+        <div class="gp-row"><label>输入单价</label><div class="gp-val"><span class="unit">¥</span><input type="number" step="0.01" min="0" value="${g.inputPrice}" data-action="g-inputPrice"${isCustom?'':' readonly'}><span class="unit">/M</span></div></div>
+        <div class="gp-row"><label>输出单价</label><div class="gp-val"><span class="unit">¥</span><input type="number" step="0.01" min="0" value="${g.outputPrice}" data-action="g-outputPrice"${isCustom?'':' readonly'}><span class="unit">/M</span></div></div>
+      </div>
+
+      <!-- Token 参数 -->
+      <div class="gp-col">
+        <div class="gp-col-title">Token 参数</div>
+        <div class="gp-row"><label>日均消息数</label><div class="gp-val"><input type="number" min="1" value="${g.msgPerDay}" data-action="g-msgPerDay"><span class="unit">条</span></div></div>
+        <div class="gp-row"><label>每条消息 Token</label><div class="gp-val"><input type="number" min="10" value="${g.tokensPerMsg}" data-action="g-tokensPerMsg"><span class="unit">tk</span></div></div>
+        <div class="gp-row"><label>输入占比</label><div class="gp-val"><input type="number" min="0" max="100" step="5" value="${g.inputRatio}" data-action="g-inputRatio"><span class="unit">%</span></div></div>
+        <div class="gp-row"><label>缓存命中率</label><div class="gp-val"><input type="number" min="0" max="100" step="5" value="${g.cacheHitRate}" data-action="g-cacheHitRate"><span class="unit">%</span></div></div>
+        <div class="gp-row"><label>上下文膨胀</label><div class="gp-val"><input type="number" min="1" max="20" step="0.1" value="${g.contextMultiplier}" data-action="g-contextMultiplier"><span class="unit">×</span></div></div>
+        <div class="gp-row"><label>服务器/用户</label><div class="gp-val"><span class="unit">¥</span><input type="number" min="0" step="0.1" value="${g.serverPerUser}" data-action="g-serverPerUser"><span class="unit">/月</span></div></div>
+        <div class="gp-row"><label>带宽/用户</label><div class="gp-val"><span class="unit">¥</span><input type="number" min="0" step="0.1" value="${g.bandwidthPerUser}" data-action="g-bandwidthPerUser"><span class="unit">/月</span></div></div>
+      </div>
+
+      <!-- 团队与固定成本 -->
+      <div class="gp-col">
+        <div class="gp-col-title">团队与固定成本</div>
+        <div class="gp-row"><label>团队人数</label><div class="gp-val"><input type="number" min="1" max="200" value="${g.teamSize}" data-action="g-teamSize"><span class="unit">人</span></div></div>
+        <div class="gp-row"><label>人均月薪</label><div class="gp-val"><input type="number" min="0" step="0.1" value="${g.avgSalaryW}" data-action="g-avgSalaryW"><span class="unit">万元</span></div></div>
+        <div class="gp-row"><label>服务器基础</label><div class="gp-val"><input type="number" min="0" step="0.05" value="${g.serverBaseW}" data-action="g-serverBaseW"><span class="unit">万元/月</span></div></div>
+        <div class="gp-row"><label>其他运营</label><div class="gp-val"><input type="number" min="0" step="0.05" value="${g.otherCostW}" data-action="g-otherCostW"><span class="unit">万元/月</span></div></div>
+        <div style="padding-top:6px;margin-top:6px;border-top:1px dashed var(--border);display:flex;justify-content:space-between;font-size:.75rem"><span style="color:var(--text3)">工资合计</span><strong style="color:#6366f1">${teamTotalW.toFixed(2)} 万元/月</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-top:4px"><span style="color:var(--text3)">固定成本合计</span><strong style="color:#ec4899">${fixedTotalW.toFixed(2)} 万元/月</strong></div>
+      </div>
+
+      <!-- 抽成 & 订阅占比 -->
+      <div class="gp-col">
+        <div class="gp-col-title">抽成与订阅结构</div>
+        <div class="gp-row"><label>订阅占 ARPPU</label><div class="gp-val"><input type="number" min="0" max="100" step="5" value="${g.subRatio}" data-action="g-subRatio"><span class="unit">%</span></div></div>
+        <div class="gp-row"><label>应用商店抽成</label><div class="gp-val"><input type="number" min="0" max="100" step="1" value="${g.commissionRate}" data-action="g-commissionRate"><span class="unit">%</span></div></div>
+        <div style="background:rgba(236,72,153,.06);border-radius:5px;padding:8px;margin-top:8px;font-size:.68rem;color:var(--text3);line-height:1.5">
+          <strong style="color:#ec4899">抽成公式：</strong><br>
+          扣除 = ARPPU × ${g.subRatio}% × ${g.commissionRate}% = <strong>${((g.subRatio||0)*(g.commissionRate||0)/10000*100).toFixed(1)}% ARPPU</strong><br>
+          <span style="color:var(--text3)">（仅订阅部分扣，装扮/抽佣不扣）</span>
+        </div>
+      </div>
+
+    </div>
+  </div>`;
 }
 
 function rToolbar(){
@@ -941,6 +1276,183 @@ function rVars(vars,layer){
   return `<div class="vlist">${items}</div><div style="margin-top:5px"><button class="btn btn-sm" data-action="vadd" data-layer="${layer}">+ 添加变量</button></div>`;
 }
 
+// ===== 12 月预测 =====
+function forecast12(r,c,g){
+  const out=[];
+  const growth=(g.growthRate||0)/100;
+  const subRatio=(g.subRatio||0)/100;
+  const commRate=(g.commissionRate||0)/100;
+  const teamFixedW=(g.teamSize||0)*(g.avgSalaryW||0)+(g.serverBaseW||0)+(g.otherCostW||0);
+  let cum=0;
+  for(let i=0;i<12;i++){
+    const factor=Math.pow(1+growth,i);
+    const mauPop_i=c.mauPop*factor;          // 亿人
+    const payPairs_i=c.payPairs*factor;      // 亿对
+    const mrrGross_i=payPairs_i*10000*(r.arppu||0); // 万元
+    const commLoss_i=mrrGross_i*subRatio*commRate;
+    const mrrNet_i=mrrGross_i-commLoss_i;
+    const varCost_i=mauPop_i*1e4*c.varCostPerUser; // 万元
+    const adSpend_i=c.adSpendW*factor;
+    const totalCost=varCost_i+teamFixedW+adSpend_i+commLoss_i;
+    const profit=mrrGross_i-totalCost;
+    cum+=profit;
+    out.push({m:i+1,mauPop:mauPop_i,mrrGross:mrrGross_i,mrrNet:mrrNet_i,varCost:varCost_i,fixed:teamFixedW,adSpend:adSpend_i,comm:commLoss_i,totalCost,profit,cum});
+  }
+  return out;
+}
+
+function rForecast(r,c,g){
+  const rows=forecast12(r,c,g);
+  const maxVal=Math.max(...rows.flatMap(x=>[x.mrrGross,x.totalCost]));
+  const fmtProfit=v=>v>=0?'+'+fm(v):fm(v);
+  const profitColor=v=>v>=0?'#10b981':'var(--rose)';
+  const rowsH=rows.map((x,i)=>{
+    const flip=i>0&&rows[i-1].profit<0&&x.profit>=0?' class="flip"':'';
+    return `<tr${flip}><td>M${x.m}</td><td>${fpr(x.mauPop/2)}</td><td>${fm(x.mrrGross)}</td><td>${fm(x.mrrNet)}</td><td>${fm(x.totalCost)}</td><td style="color:${profitColor(x.profit)};font-weight:600">${fmtProfit(x.profit)}</td><td style="color:${profitColor(x.cum)}">${fmtProfit(x.cum)}</td></tr>`;
+  }).join('');
+  const barsH=rows.map(x=>{
+    const rH=maxVal>0?(x.mrrGross/maxVal*100):0;
+    const cH=maxVal>0?(x.totalCost/maxVal*100):0;
+    return `<div class="fc-bar-group"><div class="fc-bar-pair"><div class="fc-bar-item"><div class="fc-bar-inner rev" style="height:${rH}%"></div></div><div class="fc-bar-item"><div class="fc-bar-inner cost" style="height:${cH}%"></div></div></div><div class="fc-bar-label">M${x.m}</div></div>`;
+  }).join('');
+  return `<div class="forecast-card">
+    <div class="fc-head">📈 12 月预测（含 Token / 抽成 / 团队 / 买量）
+      <span class="fc-growth"><label>月增长率</label><input type="number" min="0" max="200" step="1" value="${g.growthRate}" data-action="g-growthRate"><span>%</span></span>
+    </div>
+    <div class="fc-legend"><span class="l-rev">月收入 Gross MRR</span><span class="l-cost">月成本（可变+固定+买量+抽成）</span></div>
+    <div class="fc-bar">${barsH}</div>
+    <table class="fc-table">
+      <thead><tr><th>月</th><th>MAU 情侣对</th><th>Gross MRR</th><th>Net MRR</th><th>月成本</th><th>月利润</th><th>累计利润</th></tr></thead>
+      <tbody>${rowsH}</tbody>
+    </table>
+  </div>`;
+}
+
+// ===== Cohort 留存曲线图 =====
+function rCohortChart(r,c){
+  const months=13; // 0..12
+  const W=640,H=180,pad={t:12,r:12,b:28,l:36};
+  const plotW=W-pad.l-pad.r,plotH=H-pad.t-pad.b;
+  const xAt=i=>pad.l+(i/(months-1))*plotW;
+  const yAt=v=>pad.t+(1-v)*plotH; // v∈[0,1]
+  const pts=(rate)=>{let s='';for(let i=0;i<months;i++){const v=Math.pow(rate,i);s+=(i?' L ':'M ')+xAt(i)+' '+yAt(v);}return s;};
+  const free=(c.monthlyRetFree||0);
+  const paid=(c.monthlyRetPaid||0);
+  // Y 轴刻度
+  const yTicks=[0,0.25,0.5,0.75,1].map(v=>`<line x1="${pad.l}" x2="${W-pad.r}" y1="${yAt(v)}" y2="${yAt(v)}" stroke="#eee"/><text x="${pad.l-4}" y="${yAt(v)+3}" font-size="9" fill="#64748b" text-anchor="end">${(v*100).toFixed(0)}%</text>`).join('');
+  const xTicks=[0,3,6,9,12].map(i=>`<text x="${xAt(i)}" y="${H-10}" font-size="9" fill="#64748b" text-anchor="middle">M${i}</text>`).join('');
+  return `<div class="cohort-chart">
+    <div class="cc-head">📉 Cohort 留存曲线（按月几何衰减）</div>
+    <div class="cc-legend"><span class="l-free">免费（月留存 ${(free*100).toFixed(1)}%）</span><span class="l-paid">付费（月留存 ${(paid*100).toFixed(1)}%）</span></div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:180px">
+      ${yTicks}${xTicks}
+      <path d="${pts(free)}" fill="none" stroke="#64748b" stroke-width="2"/>
+      <path d="${pts(paid)}" fill="none" stroke="#10b981" stroke-width="2.5"/>
+    </svg>
+  </div>`;
+}
+
+// ===== 成本饼图 =====
+function rCostPie(r,c,g){
+  const teamFixedW=(g.teamSize||0)*(g.avgSalaryW||0)+(g.serverBaseW||0)+(g.otherCostW||0);
+  const tokenW=c.mauPop*1e4*c.tokenCostPerUser;
+  const infraW=c.mauPop*1e4*((g.serverPerUser||0)+(g.bandwidthPerUser||0));
+  const adW=c.adSpendW;
+  const commW=c.commissionLossW;
+  const items=[
+    {k:'团队+基础固定',v:teamFixedW,color:'#6366f1'},
+    {k:'Token',v:tokenW,color:'#10b981'},
+    {k:'服务器/带宽',v:infraW,color:'#06b6d4'},
+    {k:'买量 CAC',v:adW,color:'#f59e0b'},
+    {k:'抽成折损',v:commW,color:'#ec4899'},
+  ].filter(x=>x.v>0);
+  const total=items.reduce((a,x)=>a+x.v,0);
+  const R=70,CX=75,CY=75;
+  let angle=-Math.PI/2;
+  let paths='';
+  if(total>0){
+    items.forEach(it=>{
+      const pct=it.v/total;
+      const a2=angle+pct*Math.PI*2;
+      const large=pct>0.5?1:0;
+      const x1=CX+R*Math.cos(angle),y1=CY+R*Math.sin(angle);
+      const x2=CX+R*Math.cos(a2),y2=CY+R*Math.sin(a2);
+      paths+=`<path d="M ${CX} ${CY} L ${x1} ${y1} A ${R} ${R} 0 ${large} 1 ${x2} ${y2} Z" fill="${it.color}" opacity="0.88"/>`;
+      angle=a2;
+    });
+  } else {
+    paths=`<circle cx="${CX}" cy="${CY}" r="${R}" fill="#e5e7eb"/>`;
+  }
+  const legendH=items.map(it=>`<div class="cp-legend-row"><span><span class="cp-dot" style="background:${it.color}"></span>${it.k}</span><span><strong>${fm(it.v)}</strong><span class="cp-pct">${total>0?(it.v/total*100).toFixed(1)+'%':'0%'}</span></span></div>`).join('');
+  return `<div class="cost-pie">
+    <div class="cp-head">💸 月成本构成（当前 MAU 基数）</div>
+    <svg viewBox="0 0 150 150" style="width:150px;height:150px">${paths}<circle cx="${CX}" cy="${CY}" r="34" fill="#fff"/><text x="${CX}" y="${CY-2}" font-size="9" fill="#64748b" text-anchor="middle">月成本</text><text x="${CX}" y="${CY+10}" font-size="11" font-weight="700" fill="#1d1d1f" text-anchor="middle">${fm(total)}</text></svg>
+    <div>${legendH}</div>
+  </div>`;
+}
+
+// ===== 二维敏感性热力图：D30 付费 × CPI → LTV/CAC Net =====
+function rHeatmap(r,c,g){
+  const d30s=[10,20,30,40,50,60,70,80];
+  const cpis=[5,10,15,20,25,30,35,40];
+  const subRatio=(g.subRatio||0)/100;
+  const commRate=(g.commissionRate||0)/100;
+  const payingR=(r.payingRate||0)/100;
+  const dRate=(r.dualActiveRate||0)/100;
+  const dBoost=r.dualActiveBoost||1;
+  const dualFactor=1+dRate*(dBoost-1);
+  const paidArpu=(r.arppu||0)*(1-subRatio*commRate);
+  const paidVarCost=payingR>0?c.varCostPerUser/payingR:0;
+  const paidContribution=paidArpu-paidVarCost;
+  const i2m=(r.installToMauRate||30)/100;
+  const org=(r.organicRate||0)/100;
+  const paidInstalls=i2m>0?c.mauPairs*(1-org)/i2m:0;
+  // 当前值就近匹配到网格点，便于高亮
+  const nearest=(arr,v)=>arr.reduce((p,x)=>Math.abs(x-v)<Math.abs(p-v)?x:p,arr[0]);
+  const curD30=nearest(d30s,r.d30Paid||0);
+  const curCpi=nearest(cpis,r.cpi||0);
+  const colorFor=v=>{
+    if(!isFinite(v))return '#9ca3af';
+    if(v>=3)return '#059669';
+    if(v>=2)return '#10b981';
+    if(v>=1)return '#84cc16';
+    if(v>=0.5)return '#eab308';
+    if(v>=0)return '#f97316';
+    return '#dc2626';
+  };
+  let html=`<div class="hm-grid"><div class="hm-corner">CPI \\ D30</div>`;
+  d30s.forEach(d=>{html+=`<div class="hm-col-head">${d}%</div>`});
+  cpis.forEach(cpi=>{
+    html+=`<div class="hm-row-head">¥${cpi}</div>`;
+    d30s.forEach(d=>{
+      const monthlyRet=d/100;
+      const lifetime=monthlyRet>=1?99:1/(1-monthlyRet);
+      const effLife=lifetime*dualFactor;
+      const ltv=paidContribution*effLife;
+      const adSpend_v=paidInstalls*cpi;
+      const cac_v=c.payPairs>0?adSpend_v/c.payPairs:0;
+      const lc=cac_v>0?ltv/cac_v:0;
+      const isCur=d===curD30&&cpi===curCpi;
+      const txt=Math.abs(lc)>=100?lc.toFixed(0):lc.toFixed(2);
+      html+=`<div class="hm-cell${isCur?' current':''}" style="background:${colorFor(lc)}" title="D30=${d}% · CPI=¥${cpi} → LTV/CAC=${lc.toFixed(2)}">${txt}</div>`;
+    });
+  });
+  html+='</div>';
+  return `<div class="heatmap-card">
+    <div class="hm-head">🎯 二维敏感性：付费 D30 × CPI → LTV/CAC Net</div>
+    <div class="hm-sub">固定当前模型/抽成/ARPPU，在 8×8 参数网格中看 Cohort 净 LTV/CAC。粗框=当前值。</div>
+    ${html}
+    <div class="hm-legend">
+      <div class="hm-legend-item"><span class="hm-legend-dot" style="background:#dc2626"></span>&lt; 0 亏损</div>
+      <div class="hm-legend-item"><span class="hm-legend-dot" style="background:#f97316"></span>0–0.5</div>
+      <div class="hm-legend-item"><span class="hm-legend-dot" style="background:#eab308"></span>0.5–1</div>
+      <div class="hm-legend-item"><span class="hm-legend-dot" style="background:#84cc16"></span>1–2</div>
+      <div class="hm-legend-item"><span class="hm-legend-dot" style="background:#10b981"></span>2–3</div>
+      <div class="hm-legend-item"><span class="hm-legend-dot" style="background:#059669"></span>≥ 3 健康</div>
+    </div>
+  </div>`;
+}
+
 function rLayers(){
   const r=ar(),c=calc(r);
   // Aggregate all regions for totals
@@ -1018,6 +1530,51 @@ function rLayers(){
     </div></div>
     <div style="margin-top:10px"><span class="lbl" style="min-width:auto">影响变量（MAU→营收）</span></div>${rVars(r.revVars,'revVars')}</div>`;
 
+  // ── 分层留存 & Cohort LTV ──
+  const g=state.global||defaultGlobal();
+  const lifeFreeStr=isFinite(c.lifetimeFree)?c.lifetimeFree.toFixed(2)+' 月':'∞';
+  const lifePaidBaseStr=isFinite(c.lifetimePaidBase)?c.lifetimePaidBase.toFixed(2)+' 月':'∞';
+  const lifePaidStr=isFinite(c.lifetimePaid)?c.lifetimePaid.toFixed(2)+' 月':'∞';
+  const ltvStr=isFinite(c.cohortLtvPaid)?'¥'+c.cohortLtvPaid.toFixed(0):'—';
+  const lcCls=c.cohortLtvCacNet>=3?'good':c.cohortLtvCacNet>=1?'warn':'bad';
+  const lcStr=isFinite(c.cohortLtvCacNet)?c.cohortLtvCacNet.toFixed(2):'—';
+  h+=`<div class="retention-card">
+    <div class="ret-head">📉 分层留存 & Cohort LTV</div>
+    <div class="ret-grid">
+      <div class="ret-col">
+        <div class="ret-col-head"><span class="ret-col-title free">🆓 免费用户留存</span><span class="ret-col-badge">月留存 ${(c.monthlyRetFree*100).toFixed(1)}%</span></div>
+        <div class="ret-row"><label>D1 次日留存</label><div><input type="number" min="0" max="100" step="1" value="${r.d1Free}" data-action="d1f"><span class="unit">%</span></div></div>
+        <div class="ret-row"><label>D7 七日留存</label><div><input type="number" min="0" max="100" step="1" value="${r.d7Free}" data-action="d7f"><span class="unit">%</span></div></div>
+        <div class="ret-row"><label>D30 月留存</label><div><input type="number" min="0" max="100" step="1" value="${r.d30Free}" data-action="d30f"><span class="unit">%</span></div></div>
+        <div class="ret-summary"><span>Cohort 生命周期</span><strong>${lifeFreeStr}</strong></div>
+      </div>
+      <div class="ret-col">
+        <div class="ret-col-head"><span class="ret-col-title paid">💎 付费用户留存</span><span class="ret-col-badge">月留存 ${(c.monthlyRetPaid*100).toFixed(1)}%</span></div>
+        <div class="ret-row"><label>D1 次日留存</label><div><input type="number" min="0" max="100" step="1" value="${r.d1Paid}" data-action="d1p"><span class="unit">%</span></div></div>
+        <div class="ret-row"><label>D7 七日留存</label><div><input type="number" min="0" max="100" step="1" value="${r.d7Paid}" data-action="d7p"><span class="unit">%</span></div></div>
+        <div class="ret-row"><label>D30 月留存</label><div><input type="number" min="0" max="100" step="1" value="${r.d30Paid}" data-action="d30p"><span class="unit">%</span></div></div>
+        <div class="ret-summary"><span>基础生命周期</span><strong>${lifePaidBaseStr}</strong></div>
+      </div>
+    </div>
+
+    <div class="ret-dual">
+      <div><label>双人活跃率</label><div><input type="number" min="0" max="100" step="5" value="${r.dualActiveRate}" data-action="dact"><span class="unit">%</span></div></div>
+      <div><label>留存加成系数</label><div><input type="number" min="1" max="3" step="0.05" value="${r.dualActiveBoost}" data-action="dboost"><span class="unit">×</span></div></div>
+      <div style="text-align:right"><span style="font-size:.68rem;color:var(--text3)">综合加成</span> <strong style="color:#6366f1;font-size:.85rem">${c.dualFactor.toFixed(3)}×</strong></div>
+    </div>
+
+    <div class="ret-cohort">
+      <div class="ret-cohort-cell"><div class="rc-label">付费生命周期（含双人加成）</div><div class="rc-value" style="color:#10b981">${lifePaidStr}</div></div>
+      <div class="ret-cohort-cell"><div class="rc-label">Cohort LTV / 付费对</div><div class="rc-value">${ltvStr}</div></div>
+      <div class="ret-cohort-cell"><div class="rc-label">LTV / CAC（Cohort 净值）</div><div class="rc-value ${lcCls==='good'?'':'bad'}" style="color:${lcCls==='good'?'#10b981':lcCls==='warn'?'var(--amber)':'var(--rose)'}">${lcStr}</div></div>
+    </div>
+
+    <div style="font-size:.65rem;color:var(--text3);margin-top:8px;line-height:1.6">
+      Cohort LTV = 付费 ARPPU × (1-${((g.subRatio||0)*(g.commissionRate||0)/10000*100).toFixed(1)}%抽成) - 可变成本/付费对 × 付费生命周期<br>
+      付费生命周期 = 1 / (1 − D30 付费 ${r.d30Paid}%) × (1 + 双人活跃 ${r.dualActiveRate}% × (加成 ${r.dualActiveBoost} − 1))
+    </div>
+  </div>`;
+
   // ── 获客经济学 ──
   const health=c.ltvCac>=3?'green':c.ltvCac>=1?'amber':'rose';
   const healthTxt=c.ltvCac>=3?'<span class="dot dot-green"></span>健康':c.ltvCac>=1?'<span class="dot dot-yellow"></span>临界':'<span class="dot dot-red"></span>亏损';
@@ -1041,6 +1598,36 @@ function rLayers(){
     </div>
     <div style="font-size:.7rem;color:var(--text3);margin-top:6px">得分 = LTV/CAC×50% + 回本期×25% + SOM规模×15% + ARR×10%</div>
   </div>`;
+
+  // ===== 单位经济学 =====
+  const ueCls=v=>v>=3?'good':v>=1?'warn':'bad';
+  const contribCls=c.contributionPerMau>=0?'good':'bad';
+  const netCls=c.netContribW>=0?'good':'bad';
+  h+=`<div class="unit-econ">
+    <div class="ue-head">💰 单位经济学（含 Token 成本 + 应用商店抽成）</div>
+    <div class="ue-grid">
+      <div class="ue-cell"><div class="ue-label">Token 成本 / MAU</div><div class="ue-value">¥${c.tokenCostPerUser.toFixed(2)}<span style="font-size:.65rem;color:var(--text3);font-weight:400"> /月</span></div></div>
+      <div class="ue-cell"><div class="ue-label">可变成本 / MAU</div><div class="ue-value">¥${c.varCostPerUser.toFixed(2)}<span style="font-size:.65rem;color:var(--text3);font-weight:400"> /月</span></div></div>
+      <div class="ue-cell"><div class="ue-label">抽成折损（月）</div><div class="ue-value" style="color:var(--rose)">-${fm(c.commissionLossW)}</div></div>
+      <div class="ue-cell"><div class="ue-label">净 MRR（扣抽成）</div><div class="ue-value">${fm(c.mrrNetW)}</div></div>
+      <div class="ue-cell"><div class="ue-label">净 ARR</div><div class="ue-value">${fm(c.arrNetW)}</div></div>
+      <div class="ue-cell"><div class="ue-label">可变成本总支出</div><div class="ue-value" style="color:var(--rose)">-${fm(c.varCostTotalW)}<span style="font-size:.65rem;color:var(--text3);font-weight:400"> /月</span></div></div>
+      <div class="ue-cell"><div class="ue-label">净贡献（净MRR-可变）</div><div class="ue-value ${netCls}">${c.netContribW>=0?'+':''}${fm(c.netContribW)}</div></div>
+      <div class="ue-cell"><div class="ue-label">贡献利润 / MAU</div><div class="ue-value ${contribCls}">${c.contributionPerMau>=0?'+':''}¥${c.contributionPerMau.toFixed(2)}</div></div>
+      <div class="ue-cell"><div class="ue-label">LTV/CAC（净, per 付费对）</div><div class="ue-value ${ueCls(c.ltvCacNetFinal)}">${c.ltvCacNetFinal.toFixed(2)}</div></div>
+    </div>
+    <div class="ue-formula">
+      Token = 日均${g.msgPerDay}条 × ${g.tokensPerMsg}tk × 30 × 膨胀${g.contextMultiplier}× → 输入${g.inputRatio}% × ¥${g.inputPrice}/M × (缓存${g.cacheHitRate}%命中省90%) + 输出 × ¥${g.outputPrice}/M<br>
+      抽成 = 订阅占比 ${g.subRatio}% × 抽成率 ${g.commissionRate}% = MRR 扣除 ${((g.subRatio||0)*(g.commissionRate||0)/10000*100).toFixed(1)}%<br>
+      贡献利润/MAU = ARPPU × 付费率 × (1 - ${((g.subRatio||0)*(g.commissionRate||0)/10000*100).toFixed(1)}%) - 可变成本/用户
+    </div>
+  </div>`;
+
+  // ===== Batch C: 12月预测 / Cohort 曲线 / 成本饼图 / 敏感性热力图 =====
+  h+=rForecast(r,c,g);
+  h+=rCohortChart(r,c);
+  h+=rCostPie(r,c,g);
+  h+=rHeatmap(r,c,g);
 
   return h;
 }
@@ -1263,6 +1850,15 @@ function syncSlider(action,sid,val){
 function onInput(e){
   const el=e.target,a=el.dataset.action,r=ar();if(!a||!r)return;
 
+  // ===== 全局参数 =====
+  if(a&&a.startsWith('g-')){
+    const key=a.slice(2); // 去掉 'g-' 前缀
+    const val=parseFloat(el.value);
+    const numKeys=['inputPrice','outputPrice','msgPerDay','tokensPerMsg','inputRatio','cacheHitRate','contextMultiplier','serverPerUser','bandwidthPerUser','teamSize','avgSalaryW','serverBaseW','otherCostW','commissionRate','subRatio','growthRate'];
+    if(numKeys.includes(key)) state.global[key]=isNaN(val)?0:Math.max(0,val);
+    scheduleRender();return;
+  }
+
   if(a==='tampop'){r.tam.population=parseFloat(el.value)||0}
   else if(a==='tamdesc'){r.tam.description=el.value;saveState();return}
   else if(a==='tamsrc'){r.tam.source=el.value;saveState();return}
@@ -1276,6 +1872,14 @@ function onInput(e){
   else if(a==='i2m'){r.installToMauRate=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
   else if(a==='org'){r.organicRate=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
   else if(a==='lt'){r.avgLifetimeMonths=Math.max(1,parseFloat(el.value)||0)}
+  else if(a==='d1f'){r.d1Free=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='d7f'){r.d7Free=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='d30f'){r.d30Free=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='d1p'){r.d1Paid=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='d7p'){r.d7Paid=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='d30p'){r.d30Paid=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='dact'){r.dualActiveRate=Math.max(0,Math.min(100,parseFloat(el.value)||0))}
+  else if(a==='dboost'){r.dualActiveBoost=Math.max(1,Math.min(3,parseFloat(el.value)||1))}
   else if(a==='segr'||a==='segrs'){const s=r.segments.find(x=>x.id===el.dataset.sid);if(s){s.rate=Math.max(0,Math.min(100,parseFloat(el.value)||0));syncSlider(a,s.id,s.rate)}}
   else if(a==='segname'){const s=r.segments.find(x=>x.id===el.dataset.sid);if(s){s.name=el.value;saveState();return}}
   else if(a==='segpain'){const s=r.segments.find(x=>x.id===el.dataset.sid);if(s){s.painPoint=el.value;saveState();return}}
@@ -1283,12 +1887,19 @@ function onInput(e){
   else if(a==='vname'){const v=fv(r,el.dataset.layer,el.dataset.vid);if(v){v.name=el.value;saveState();return}}
   else if(a==='vdetail'){const v=fv(r,el.dataset.layer,el.dataset.vid);if(v){v.detail=el.value;saveState();return}}
   else return;
-  render();
+  scheduleRender();
 }
 
 function onChange(e){
   const el=e.target;
   if(el.dataset.action==='vtrend'){const r=ar(),v=fv(r,el.dataset.layer,el.dataset.vid);if(v){v.trend=el.value;saveState()}}
+  else if(el.dataset.action==='g-model'){
+    const key=el.value;
+    const m=MODEL_PRICES[key];if(!m)return;
+    state.global.model=key;
+    if(key!=='custom'){state.global.inputPrice=m.input;state.global.outputPrice=m.output}
+    render();
+  }
 }
 
 function onClick(e){
